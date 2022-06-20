@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import 'package:app_jardin/pages/agregar_page.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -24,11 +24,19 @@ class _MainPageState extends State<MainPage> {
           children: [
             Container(
               width: double.infinity,
-              child: ElevatedButton(child: Text('Agregar'), onPressed: (() {
-                MaterialPageRoute route = MaterialPageRoute(builder: (context){
-                  return Text('hola'); //debo poner la pagina agregar
-                });
-              }),),
+              child: ElevatedButton(
+                child: Text('Agregar'),
+                onPressed: (() {
+                  MaterialPageRoute route =
+                      MaterialPageRoute(builder: (context) {
+                    return AgregarPage(); //debo poner la pagina agregar
+                  });
+                  Navigator.push(context, route).then((value) {
+                    print('VEAMOS SI LO MUESTRA');
+                    setState(() {});
+                  });
+                }),
+              ),
             )
           ],
         ),
