@@ -2,11 +2,13 @@ import 'package:app_jardin/pages/forms_agregar/agregar_educadora.dart';
 import 'package:app_jardin/pages/forms_agregar/agregar_evento.dart';
 import 'package:app_jardin/pages/forms_agregar/agregar_ni%C3%B1o.dart';
 import 'package:app_jardin/pages/forms_agregar/agregar_nivel.dart';
+import 'package:app_jardin/pages/main_page_page.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AgregarPage extends StatefulWidget {
-  AgregarPage({Key? key}) : super(key: key);
+  final int index_agregar;
+  AgregarPage({Key? key, required this.index_agregar}) : super(key: key);
 
   @override
   State<AgregarPage> createState() => _AgregarPageState();
@@ -32,7 +34,9 @@ class _AgregarPageState extends State<AgregarPage> {
           length: 4,
           child: ListView(
             children: [
-              ToggleFormButton(),
+              ToggleFormButton(
+                index_agregar: widget.index_agregar,
+              ),
               Container(
                 alignment: Alignment.center,
               ),
@@ -54,15 +58,32 @@ class _AgregarPageState extends State<AgregarPage> {
 }
 
 class ToggleFormButton extends StatefulWidget {
+  final int index_agregar;
+  ToggleFormButton({Key? key, required this.index_agregar}) : super(key: key);
+
   @override
   State<ToggleFormButton> createState() => _ToggleFormButtonState();
 }
 
 class _ToggleFormButtonState extends State<ToggleFormButton> {
   final List<bool> _isSelected = List.generate(4, (_) => false);
+  void _initState() {
+    _isSelected[widget.index_agregar] = true;
+    if (widget.index_agregar == 0) {
+      DefaultTabController.of(context)?.animateTo(0);
+    } else if (widget.index_agregar == 1) {
+      DefaultTabController.of(context)?.animateTo(1);
+    } else if (widget.index_agregar == 2) {
+      DefaultTabController.of(context)?.animateTo(2);
+    } else if (widget.index_agregar == 3) {
+      DefaultTabController.of(context)?.animateTo(3);
+    }
+    return;
+  }
 
   @override
   Widget build(BuildContext context) {
+    _initState();
     return Container(
       alignment: Alignment.center,
       child: ToggleButtons(
@@ -86,6 +107,8 @@ class _ToggleFormButtonState extends State<ToggleFormButton> {
         ],
         onPressed: (int index) {
           setState(() {
+            _isSelected[widget.index_agregar] = false;
+
             for (int buttonIndex = 0;
                 buttonIndex < _isSelected.length;
                 buttonIndex++) {

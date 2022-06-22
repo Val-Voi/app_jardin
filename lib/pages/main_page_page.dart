@@ -17,6 +17,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  int index_agregar = 0;
   final GlobalKey<ExpansionTileCardState> cardNinos = new GlobalKey();
   final GlobalKey<ExpansionTileCardState> cardEducadoras = new GlobalKey();
   final GlobalKey<ExpansionTileCardState> cardEventos = new GlobalKey();
@@ -92,9 +93,12 @@ class _MainPageState extends State<MainPage> {
                             style: BorderStyle.solid),
                       ),
                       onPressed: (() {
+                        index_agregar = 0;
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
-                          return AgregarPage(); //debo poner la pagina agregar
+                          return AgregarPage(
+                            index_agregar: index_agregar,
+                          ); //debo poner la pagina agregar
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -169,9 +173,12 @@ class _MainPageState extends State<MainPage> {
                     ),
                     ElevatedButton(
                       onPressed: (() {
+                        index_agregar = 1;
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
-                          return AgregarPage(); //debo poner la pagina agregar
+                          return AgregarPage(
+                            index_agregar: index_agregar,
+                          ); //debo poner la pagina agregar
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -246,9 +253,13 @@ class _MainPageState extends State<MainPage> {
                     ),
                     ElevatedButton(
                       onPressed: (() {
+                        index_agregar = 3;
+
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
-                          return AgregarPage(); //debo poner la pagina agregar
+                          return AgregarPage(
+                            index_agregar: index_agregar,
+                          ); //debo poner la pagina agregar
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -343,9 +354,13 @@ class _MainPageState extends State<MainPage> {
                     ),
                     ElevatedButton(
                       onPressed: (() {
+                        index_agregar = 2;
+
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
-                          return AgregarPage(); //debo poner la pagina agregar
+                          return AgregarPage(
+                            index_agregar: index_agregar,
+                          ); //debo poner la pagina agregar
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
