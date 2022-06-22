@@ -7,7 +7,7 @@ class JardinProvider {
 
   //retorna la lista de niños
   Future<List<dynamic>> getNinos() async{
-    var uri = Uri.parse('$apiURL/niños');
+    var uri = Uri.parse('$apiURL/ninos');
     var respuesta = await http.get(uri);
 
     if(respuesta.statusCode == 200) {
@@ -19,7 +19,7 @@ class JardinProvider {
 
   //borra un niño
   Future<bool> ninoBorrar(String id) async {
-    var uri = Uri.parse('$apiURL/niños/$id');
+    var uri = Uri.parse('$apiURL/ninos/$id');
     var respuesta = await http.delete(uri);
     return respuesta.statusCode == 200;
   }
