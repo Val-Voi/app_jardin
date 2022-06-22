@@ -97,7 +97,6 @@ class _MainPageState extends State<MainPage> {
                           return AgregarPage(); //debo poner la pagina agregar
                         });
                         Navigator.push(context, route).then((value) {
-                          print('VEAMOS SI LO MUESTRA');
                           setState(() {});
                         });
                       }),
@@ -175,7 +174,6 @@ class _MainPageState extends State<MainPage> {
                           return AgregarPage(); //debo poner la pagina agregar
                         });
                         Navigator.push(context, route).then((value) {
-                          print('VEAMOS SI LO MUESTRA');
                           setState(() {});
                         });
                       }),
@@ -253,7 +251,6 @@ class _MainPageState extends State<MainPage> {
                           return AgregarPage(); //debo poner la pagina agregar
                         });
                         Navigator.push(context, route).then((value) {
-                          print('VEAMOS SI LO MUESTRA');
                           setState(() {});
                         });
                       }),
@@ -351,7 +348,6 @@ class _MainPageState extends State<MainPage> {
                           return AgregarPage(); //debo poner la pagina agregar
                         });
                         Navigator.push(context, route).then((value) {
-                          print('VEAMOS SI LO MUESTRA');
                           setState(() {});
                         });
                       }),
