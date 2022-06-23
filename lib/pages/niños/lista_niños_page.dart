@@ -35,71 +35,71 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                       child: CircularProgressIndicator(),
                     );
                   }
-            return ListView.separated(
-              separatorBuilder: (_, __)=> Divider(),
-              itemCount: snap.data.length,
-              itemBuilder: (context, index){
-                var nino = snap.data[index];
-                return Slidable(
-                  child: ListTile(
-                    leading: Icon(MdiIcons.humanChild),
-                    title: Text('[${nino['id']}] ${nino['nombre']}'),
-                    subtitle: Text('RUT: ${nino['rut']}'),
-                  ),
-                  startActionPane: ActionPane(
-                    motion: ScrollMotion(),
-                    children:[
-                      SlidableAction(
-                        onPressed: (context) {
-                          MaterialPageRoute route = MaterialPageRoute(
-                            builder: (context) => MainPage(),
-                          );
-                          Navigator.push(context, route).then((value) {
-                            setState(() {});
-                          });
-                        },
-                        backgroundColor: Colors.purple,
-                        icon: MdiIcons.pen,
-                        label: 'Editar',
-                      ),
-                    ],
-                  ),
-                  endActionPane: ActionPane(
-                    motion: ScrollMotion(),
-                      children: [
-                        SlidableAction(
-                          onPressed: (context) {
-                            String id_nino = nino['id'];
-                            String nombre = nino['nombre'];
-
-                            // confirmDialog(context, nombre).then((confirma) {
-                            //   if (confirma) {
-                            //     //borrar
-                            //     JardinProvider().ninoBorrar(id_nino).then((borradoOk) {
-                            //       if (borradoOk) {
-                            //         //pudo borrar
-                            //         snap.data.removeAt(index);
-                            //         setState(() {});
-                                    
-                            //         showSnackbar('Nino $nombre borrado');
-                            //       } else {
-                            //         //no pudo borrar
-                            //         showSnackbar('No se pudo borrar el producto');
-                            //       }
-                            //     });
-                            //   }
-                            // });
-                          },
-                          backgroundColor: Colors.red,
-                          icon: MdiIcons.trashCan,
-                          label: 'Borrar',
+                  return ListView.separated(
+                    separatorBuilder: (_, __) => Divider(),
+                    itemCount: snap.data.length,
+                    itemBuilder: (context, index) {
+                      var nino = snap.data[index];
+                      return Slidable(
+                        child: ListTile(
+                          leading: Icon(MdiIcons.humanChild),
+                          title: Text('[${nino['id']}] ${nino['nombre']}'),
+                          subtitle: Text('RUT: ${nino['rut']}'),
                         ),
+                        startActionPane: ActionPane(
+                          motion: ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                MaterialPageRoute route = MaterialPageRoute(
+                                  builder: (context) => MainPage(),
+                                );
+                                Navigator.push(context, route).then((value) {
+                                  setState(() {});
+                                });
+                              },
+                              backgroundColor: Colors.purple,
+                              icon: MdiIcons.pen,
+                              label: 'Editar',
+                            ),
                           ],
                         ),
-                      );   
+                        endActionPane: ActionPane(
+                          motion: ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                String id_nino = nino['id'];
+                                String nombre = nino['nombre'];
+
+                                // confirmDialog(context, nombre).then((confirma) {
+                                //   if (confirma) {
+                                //     //borrar
+                                //     JardinProvider().ninoBorrar(id_nino).then((borradoOk) {
+                                //       if (borradoOk) {
+                                //         //pudo borrar
+                                //         snap.data.removeAt(index);
+                                //         setState(() {});
+
+                                //         showSnackbar('Nino $nombre borrado');
+                                //       } else {
+                                //         //no pudo borrar
+                                //         showSnackbar('No se pudo borrar el producto');
+                                //       }
+                                //     });
+                                //   }
+                                // });
+                              },
+                              backgroundColor: Colors.red,
+                              icon: MdiIcons.trashCan,
+                              label: 'Borrar',
+                            ),
+                          ],
+                        ),
+                      );
                     },
                   );
-                }, 
+                },
               ),
             ),
           ],
@@ -108,4 +108,3 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
     );
   }
 }
-
