@@ -43,7 +43,7 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                       return Slidable(
                         child: ListTile(
                           leading: Icon(MdiIcons.humanChild),
-                          title: Text('[${nino['id']}] ${nino['nombre']}'),
+                          title: Text('${nino['id']} ${nino['nombre']}'),
                           subtitle: Text('RUT: ${nino['rut']}'),
                         ),
                         startActionPane: ActionPane(

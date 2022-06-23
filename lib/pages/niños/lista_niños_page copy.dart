@@ -42,11 +42,14 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                           var nino = snap.data[index];
                           return Center(
                             child: Card(
+                              color: colores(),
                               child: Column(
+                                
                               children: [
                                 ListTile(
+                                  
                                   leading: Icon(MdiIcons.humanChild),
-                                  title: Text('[${nino['id']}] ${nino['nombre']}'),
+                                  title: Text('${nino['id']} ${nino['nombre']}'),
                                   subtitle: Text('RUT: ${nino['rut']}'),
                                 ),
                               ],
@@ -62,4 +65,8 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
               ],
             )));
   }
+}
+
+colores() {
+  return Colors.blueAccent;
 }

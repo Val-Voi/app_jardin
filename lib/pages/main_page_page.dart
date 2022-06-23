@@ -1,12 +1,12 @@
 import 'package:app_jardin/pages/lista_eventos_page.dart';
-import 'package:app_jardin/pages/ni%C3%B1os/lista_ni%C3%B1os_page.dart';
+// import 'package:app_jardin/pages/ni%C3%B1os/lista_ni%C3%B1os_page.dart';
 import 'package:app_jardin/pages/niveles/agregar_a_nivel_page.dart';
 import 'package:app_jardin/pages/niveles/menu_niveles_page.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:app_jardin/pages/agregar_page.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
-
+import 'package:app_jardin/pages/niños/lista_niños_page copy.dart';
 import 'educadoras/lista_educadoras_page.dart';
 
 class MainPage extends StatefulWidget {
