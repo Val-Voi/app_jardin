@@ -15,7 +15,7 @@ class _ListaEventosPageState extends State<ListaEventosPage> {
       appBar: AppBar(
         title: Text('Jardin App'),
         backgroundColor: Color.fromARGB(255, 136, 236, 74),
-        leading: Icon(MdiIcons.humanChild),
+        leading: BackButton(),
       ),
       body: Text('Lista completa Eventos'),
     );
