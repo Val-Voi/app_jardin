@@ -49,11 +49,21 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                 ListTile(
                                   
                                   leading: Icon(MdiIcons.humanChild),
-                                  title: Text('${nino['id']} ${nino['nombre']}'),
-                                  subtitle: Text('RUT: ${nino['rut']}'),
+                                  title: Text('${nino['nombre']}', style: TextStyle(fontSize: 20.0,color: Colors.green),),
+                                  subtitle: Text('Nivel ${nino['niveles_id']}'),
                                 ),
+                                Container(
+                                  width: 270.0,
+                                  height: 50.0,
+                                  // color: Colors.grey,
+                                  child: Text('RUT: ${nino['rut']}''\nNacimiento: ${nino['fecha_nacimiento']}''\nContacto: ${nino['contacto_apoderado']}'),
+                                  
+                                  
+                                )
                               ],
+                            
                             ),
+                            
                             )
                             
                           );
@@ -68,5 +78,6 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
 }
 
 colores() {
-  return Colors.blueAccent;
+  
+  // return Colors.blueAccent;
 }
