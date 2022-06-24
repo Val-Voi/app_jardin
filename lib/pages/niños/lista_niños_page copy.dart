@@ -7,6 +7,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:app_jardin/main.dart';
+import 'package:intl/date_symbol_data_file.dart';
 
 class ListaNinosPage extends StatefulWidget {
   ListaNinosPage({Key? key}) : super(key: key);
@@ -24,6 +25,13 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
     Color.fromARGB(255, 244, 174, 102),
     Color.fromARGB(255, 100, 226, 210),
   ];
+
+//  @override
+//   void initState() {
+//     super.initState();
+//   initializeDateFormatting('de_DE', null).then((_) => runMyCode());
+//   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,11 +99,41 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                           );
                                           Navigator.push(context, route);
                                         } else {
-                                          MaterialPageRoute route =
-                                              MaterialPageRoute(
-                                            builder: (context) => MainPage(),
-                                          );
-                                          Navigator.push(context, route);
+                                          int nino_id = nino['id'];
+
+                                          JardinProvider()
+                                              .ninoBorrar(nino_id)
+                                              .then((borradoOk) {
+                                            if (borradoOk) {
+                                              //pudo borrar
+                                              snap.data.removeAt(index);
+                                              setState(() {});
+
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  duration:
+                                                      Duration(seconds: 4),
+                                                  content: Text(
+                                                    'Niño ${nino['nombre']} borrado',
+                                                    style:
+                                                        TextStyle(fontSize: 16),
+                                                  ),
+                                                ),
+                                              );
+                                            } else {
+                                              //no pudo borrar
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  duration:
+                                                      Duration(seconds: 4),
+                                                  content: Text(
+                                                      'El niño no se pudo borrar'),
+                                                ),
+                                              );
+                                            }
+                                          });
                                         }
                                       },
                                     ),
@@ -106,7 +144,7 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                     // color: Colors.grey,
                                     child: Text(
                                       'RUT: ${nino['rut']}'
-                                      '\nNacimiento: ${nino['fecha_nacimiento']}',
+                                      '\nNacimiento: ${DateFormat.yMd().format(DateTime.parse(nino['fecha_nacimiento']))}',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16.0,
