@@ -15,7 +15,7 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
       appBar: AppBar(
         title: Text('Jardin App'),
         backgroundColor: Color.fromARGB(255, 136, 236, 74),
-        leading: Icon(MdiIcons.humanChild),
+        leading: BackButton(),
       ),
       body: Text('Lista Educadoras con editar y borrar'),
     );

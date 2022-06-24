@@ -15,7 +15,7 @@ class _MenuNivelesPageState extends State<MenuNivelesPage> {
       appBar: AppBar(
         title: Text('Jardin App'),
         backgroundColor: Color.fromARGB(255, 136, 236, 74),
-        leading: Icon(MdiIcons.humanChild),
+        leading: BackButton(),
       ),
       body: Text(
           'Menu de niveles, pudiendo entrar a ver lista de integrantes de ese nivel '),
