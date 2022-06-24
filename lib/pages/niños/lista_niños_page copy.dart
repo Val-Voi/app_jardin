@@ -14,70 +14,89 @@ class ListaNinosPage extends StatefulWidget {
 }
 
 class _ListaNinosPageState extends State<ListaNinosPage> {
+  int _contadorColor = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Jardin App'),
-          backgroundColor: Color.fromARGB(255, 136, 236, 74),
+          backgroundColor: Color.fromARGB(255, 212, 146, 247),
           leading: BackButton(),
         ),
         body: Padding(
             padding: EdgeInsets.all(5),
-            child: Column(
-              children: [
-                Expanded(
-                  child: FutureBuilder(
-                    future: JardinProvider().getNinos(),
-                    builder: (context, AsyncSnapshot snap) {
-                      if (!snap.hasData) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      return ListView.separated(
-                        separatorBuilder: (_, __) => Divider(),
-                        itemCount: snap.data.length,
-                        itemBuilder: (context, index) {
-                          var nino = snap.data[index];
+            child: Container(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: FutureBuilder(
+                      future: JardinProvider().getNinos(),
+                      builder: (context, AsyncSnapshot snap) {
+                        if (!snap.hasData) {
                           return Center(
-                            child: Card(
-                              color: colores(),
-                              child: Column(
-                                
-                              children: [
-                                ListTile(
-                                  
-                                  leading: Icon(MdiIcons.humanChild),
-                                  title: Text('${nino['nombre']}', style: TextStyle(fontSize: 20.0,color: Colors.green),),
-                                  subtitle: Text('Nivel ${nino['niveles_id']}'),
-                                ),
-                                Container(
-                                  width: 270.0,
-                                  height: 50.0,
-                                  // color: Colors.grey,
-                                  child: Text('RUT: ${nino['rut']}''\nNacimiento: ${nino['fecha_nacimiento']}''\nContacto: ${nino['contacto_apoderado']}'),
-                                  
-                                  
-                                )
-                              ],
-                            
-                            ),
-                            
-                            )
-                            
+                            child: CircularProgressIndicator(),
                           );
-                        },
-                      );
-                    },
+                        }
+                        return ListView.separated(
+                          separatorBuilder: (_, __) => Divider(),
+                          itemCount: snap.data.length,
+                          itemBuilder: (context, index) {
+                            var nino = snap.data[index];
+                            return Center(
+                                child: Card(
+                              color: colores(contadorColor()),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: Icon(MdiIcons.humanChild),
+                                    title: Text(
+                                      '${nino['nombre']}',
+                                      style: TextStyle(
+                                          fontSize: 20.0, color: Colors.white, fontWeight: FontWeight.bold),
+                                    ),
+                                    subtitle: Text('Nivel ${nino['niveles_id']}', style: TextStyle(color: Colors.white,fontSize: 16.0,), ),
+                                  ),
+                                  Container(
+                                    width: 270.0,
+                                    // height: 50.0,
+                                    // color: Colors.grey,
+                                    child: Text('RUT: ${nino['rut']}'
+                                        '\nNacimiento: ${nino['fecha_nacimiento']}',style: TextStyle(color: Colors.white,fontSize: 16.0,),),
+                                  ),
+                                  Divider(indent: 70.0,endIndent: 140, thickness: 5, color: Colors.black,),
+                                  Container(
+                                    child: Text(
+                                        'Contacto: ${nino['contacto_apoderado']}',style: TextStyle(color: Colors.white,fontSize: 16.0,),),
+                                  )
+                                ],
+                              ),
+                            ));
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )));
+
   }
+      int contadorColor() {
+      _contadorColor++;
+      if (_contadorColor >= 5) {
+        _contadorColor = 0;
+      }
+      return _contadorColor;
+    }
 }
 
-colores() {
-  
-  // return Colors.blueAccent;
+colores(int contadorColor) {
+  List<Color> colores = [
+    Color.fromARGB(255, 88, 168, 252),
+    Color.fromARGB(255, 234, 100, 132),
+    Color.fromARGB(255, 185, 123, 243),
+    Color.fromARGB(255, 244, 174, 102),
+    Color.fromARGB(255, 100, 226, 210),
+  ];
+  return colores[contadorColor];
 }
