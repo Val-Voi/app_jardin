@@ -37,7 +37,7 @@ class _AgregarNivelState extends State<AgregarNivel> {
               child: ElevatedButton(
                   child: Text('Agregar'),
                   onPressed: () async {
-                    var respuesta = await JardinProvider().jardinAgregar(
+                    var respuesta = await JardinProvider().nivelAgregar(
                       nombreCtrl.text.trim(),
                     );
 

@@ -1,3 +1,5 @@
+import 'package:app_jardin/pages/forms_agregar/agregar_educadora.dart';
+import 'package:app_jardin/pages/forms_agregar/agregar_ni%C3%B1o.dart';
 import 'package:app_jardin/pages/main_page_page.dart';
 import 'package:app_jardin/providers/jardin_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,13 @@ class ListaNinosPage extends StatefulWidget {
 
 class _ListaNinosPageState extends State<ListaNinosPage> {
   int _contadorColor = 0;
+  List<Color> colores = [
+    Color.fromARGB(255, 88, 168, 252),
+    Color.fromARGB(255, 234, 100, 132),
+    Color.fromARGB(255, 185, 123, 243),
+    Color.fromARGB(255, 244, 174, 102),
+    Color.fromARGB(255, 100, 226, 210),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +53,7 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                             var nino = snap.data[index];
                             return Center(
                                 child: Card(
-                              color: colores(contadorColor()),
+                              color: color(),
                               child: Column(
                                 children: [
                                   ListTile(
@@ -52,21 +61,72 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                     title: Text(
                                       '${nino['nombre']}',
                                       style: TextStyle(
-                                          fontSize: 20.0, color: Colors.white, fontWeight: FontWeight.bold),
+                                          fontSize: 20.0,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    subtitle: Text('Nivel ${nino['niveles_id']}', style: TextStyle(color: Colors.white,fontSize: 16.0,), ),
+                                    subtitle: Text(
+                                      'Nivel ${nino['niveles_id']}',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    trailing: PopupMenuButton(
+                                      itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                          value: 'editar',
+                                          child: Text('Editar'),
+                                        ),
+                                        PopupMenuItem(
+                                          value: 'borrar',
+                                          child: Text('Borrar'),
+                                        ),
+                                      ],
+                                      onSelected: (opcion) {
+                                        if (opcion == 'editar') {
+                                          MaterialPageRoute route =
+                                              MaterialPageRoute(
+                                            builder: (context) => AgregarNino(),
+                                          );
+                                          Navigator.push(context, route);
+                                        } else {
+                                          MaterialPageRoute route =
+                                              MaterialPageRoute(
+                                            builder: (context) => MainPage(),
+                                          );
+                                          Navigator.push(context, route);
+                                        }
+                                      },
+                                    ),
                                   ),
                                   Container(
                                     width: 270.0,
                                     // height: 50.0,
                                     // color: Colors.grey,
-                                    child: Text('RUT: ${nino['rut']}'
-                                        '\nNacimiento: ${nino['fecha_nacimiento']}',style: TextStyle(color: Colors.white,fontSize: 16.0,),),
+                                    child: Text(
+                                      'RUT: ${nino['rut']}'
+                                      '\nNacimiento: ${nino['fecha_nacimiento']}',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
                                   ),
-                                  Divider(indent: 70.0,endIndent: 140, thickness: 5, color: Colors.black,),
+                                  Divider(
+                                    indent: 70.0,
+                                    endIndent: 140,
+                                    thickness: 5,
+                                    color: Colors.black,
+                                  ),
                                   Container(
                                     child: Text(
-                                        'Contacto: ${nino['contacto_apoderado']}',style: TextStyle(color: Colors.white,fontSize: 16.0,),),
+                                      'Contacto: ${nino['contacto_apoderado']}',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
@@ -79,24 +139,13 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                 ],
               ),
             )));
-
   }
-      int contadorColor() {
-      _contadorColor++;
-      if (_contadorColor >= 5) {
-        _contadorColor = 0;
-      }
-      return _contadorColor;
-    }
-}
 
-colores(int contadorColor) {
-  List<Color> colores = [
-    Color.fromARGB(255, 88, 168, 252),
-    Color.fromARGB(255, 234, 100, 132),
-    Color.fromARGB(255, 185, 123, 243),
-    Color.fromARGB(255, 244, 174, 102),
-    Color.fromARGB(255, 100, 226, 210),
-  ];
-  return colores[contadorColor];
+  Color color() {
+    _contadorColor++;
+    if (_contadorColor >= 5) {
+      _contadorColor = 0;
+    }
+    return colores[_contadorColor];
+  }
 }
