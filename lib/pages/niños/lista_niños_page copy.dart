@@ -62,109 +62,123 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                             return Center(
                                 child: Card(
                               color: color(),
-                              child: Column(
+                              child: Row(
                                 children: [
-                                  ListTile(
-                                    leading: Icon(MdiIcons.humanChild),
-                                    title: Text(
-                                      '${nino['nombre']}',
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    subtitle: Text(
-                                      'Nivel ${nino['niveles_id']}',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    trailing: PopupMenuButton(
-                                      itemBuilder: (context) => [
-                                        PopupMenuItem(
-                                          value: 'editar',
-                                          child: Text('Editar'),
-                                        ),
-                                        PopupMenuItem(
-                                          value: 'borrar',
-                                          child: Text('Borrar'),
-                                        ),
-                                      ],
-                                      onSelected: (opcion) {
-                                        if (opcion == 'editar') {
-                                          MaterialPageRoute route =
-                                              MaterialPageRoute(
-                                            builder: (context) => AgregarNino(),
-                                          );
-                                          Navigator.push(context, route);
-                                        } else {
-                                          int nino_id = nino['id'];
-
-                                          JardinProvider()
-                                              .ninoBorrar(nino_id)
-                                              .then((borradoOk) {
-                                            if (borradoOk) {
-                                              //pudo borrar
-                                              snap.data.removeAt(index);
-                                              setState(() {});
-
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  duration:
-                                                      Duration(seconds: 4),
-                                                  content: Text(
-                                                    'Niño ${nino['nombre']} borrado',
-                                                    style:
-                                                        TextStyle(fontSize: 16),
-                                                  ),
-                                                ),
-                                              );
-                                            } else {
-                                              //no pudo borrar
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  duration:
-                                                      Duration(seconds: 4),
-                                                  content: Text(
-                                                      'El niño no se pudo borrar'),
-                                                ),
-                                              );
-                                            }
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ),
                                   Container(
-                                    width: 270.0,
-                                    // height: 50.0,
+                                    width: 100,
+                                    height: 100,
+                                    alignment: Alignment.center,
+                                    
                                     // color: Colors.grey,
-                                    child: Text(
-                                      'RUT: ${nino['rut']}'
-                                      '\nNacimiento: ${DateFormat.yMd().format(DateTime.parse(nino['fecha_nacimiento']))}',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16.0,
+                                    child: Text('probando'),),
+                                  Expanded(child: Column(
+                                    
+
+                                    children: [
+                                      ListTile(
+                                        
+                                        title: Text(
+                                          '${nino['nombre']}',
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        subtitle: Text(
+                                          'Nivel ${nino['niveles_id']}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                        trailing: PopupMenuButton(
+                                          itemBuilder: (context) => [
+                                            PopupMenuItem(
+                                              value: 'editar',
+                                              child: Text('Editar'),
+                                            ),
+                                            PopupMenuItem(
+                                              value: 'borrar',
+                                              child: Text('Borrar'),
+                                            ),
+                                          ],
+                                          onSelected: (opcion) {
+                                            if (opcion == 'editar') {
+                                              MaterialPageRoute route =
+                                                  MaterialPageRoute(
+                                                builder: (context) => AgregarNino(),
+                                              );
+                                              Navigator.push(context, route);
+                                            } else {
+                                              int nino_id = nino['id'];
+
+                                              JardinProvider()
+                                                  .ninoBorrar(nino_id)
+                                                  .then((borradoOk) {
+                                                if (borradoOk) {
+                                                  //pudo borrar
+                                                  snap.data.removeAt(index);
+                                                  setState(() {});
+
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      duration:
+                                                          Duration(seconds: 4),
+                                                      content: Text(
+                                                        'Niño ${nino['nombre']} borrado',
+                                                        style:
+                                                            TextStyle(fontSize: 16),
+                                                      ),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  //no pudo borrar
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      duration:
+                                                          Duration(seconds: 4),
+                                                      content: Text(
+                                                          'El niño no se pudo borrar'),
+                                                    ),
+                                                  );
+                                                }
+                                              });
+                                            }
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  Divider(
-                                    indent: 70.0,
-                                    endIndent: 140,
-                                    thickness: 5,
-                                    color: Colors.black,
-                                  ),
-                                  Container(
-                                    child: Text(
-                                      'Contacto: ${nino['contacto_apoderado']}',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16.0,
+                                      Container(
+                                        width: 270.0,
+                                        // height: 50.0,
+                                        // color: Colors.grey,
+                                        child: Text(
+                                          'RUT: ${nino['rut']}',
+                                          // '\nNacimiento: ${DateFormat.yMd().format(DateTime.parse(nino['fecha_nacimiento']))}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      Divider(
+                                        indent: 70.0,
+                                        endIndent: 140,
+                                        thickness: 5,
+                                        color: Colors.black,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          'Contacto: ${nino['contacto_apoderado']}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                   )
                                 ],
                               ),
