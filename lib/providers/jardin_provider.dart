@@ -255,6 +255,17 @@ class JardinProvider {
     }
   }
 
+  Future<List<dynamic>> getEventosNino(int id) async {
+    var uri = Uri.parse('$apiURL/ninos/$id/eventos');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
+  }
+
   //borra un evento
   Future<bool> borrarEvento(int id) async {
     var uri = Uri.parse('$apiURL/eventos/$id');

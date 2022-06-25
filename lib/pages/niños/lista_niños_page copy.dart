@@ -9,6 +9,8 @@ import 'package:intl/intl.dart';
 import 'package:app_jardin/main.dart';
 import 'package:intl/date_symbol_data_file.dart';
 
+import 'eventos_niño_page.dart';
+
 class ListaNinosPage extends StatefulWidget {
   ListaNinosPage({Key? key}) : super(key: key);
 
@@ -68,15 +70,14 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                     width: 100,
                                     height: 100,
                                     alignment: Alignment.center,
-                                    
-                                    // color: Colors.grey,
-                                    child: Text('probando'),),
-                                  Expanded(child: Column(
-                                    
 
+                                    // color: Colors.grey,
+                                    child: Text('probando'),
+                                  ),
+                                  Expanded(
+                                      child: Column(
                                     children: [
                                       ListTile(
-                                        
                                         title: Text(
                                           '${nino['nombre']}',
                                           style: TextStyle(
@@ -94,6 +95,10 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                         trailing: PopupMenuButton(
                                           itemBuilder: (context) => [
                                             PopupMenuItem(
+                                              value: 'eventos',
+                                              child: Text('Ver Eventos'),
+                                            ),
+                                            PopupMenuItem(
                                               value: 'editar',
                                               child: Text('Editar'),
                                             ),
@@ -106,10 +111,25 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                             if (opcion == 'editar') {
                                               MaterialPageRoute route =
                                                   MaterialPageRoute(
-                                                builder: (context) => AgregarNino(),
+                                                builder: (context) =>
+                                                    AgregarNino(),
                                               );
                                               Navigator.push(context, route);
-                                            } else {
+                                            } else if (opcion == 'eventos') {
+                                              int nino_id = nino['id'];
+                                              String nino_nombre =
+                                                  nino['nombre'];
+                                              MaterialPageRoute route =
+                                                  MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EventosNinoPage(
+                                                  color: color(),
+                                                  id_nino: nino_id,
+                                                  nino_nombre: nino_nombre,
+                                                ),
+                                              );
+                                              Navigator.push(context, route);
+                                            } else if (opcion == 'borrar') {
                                               int nino_id = nino['id'];
 
                                               JardinProvider()
@@ -127,8 +147,8 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                                           Duration(seconds: 4),
                                                       content: Text(
                                                         'Niño ${nino['nombre']} borrado',
-                                                        style:
-                                                            TextStyle(fontSize: 16),
+                                                        style: TextStyle(
+                                                            fontSize: 16),
                                                       ),
                                                     ),
                                                   );
@@ -178,8 +198,7 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                         ),
                                       ),
                                     ],
-                                  )
-                                  )
+                                  ))
                                 ],
                               ),
                             ));
