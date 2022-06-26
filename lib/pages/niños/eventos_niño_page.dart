@@ -30,6 +30,7 @@ class _EventosNinoPageState extends State<EventosNinoPage> {
           leading: BackButton(),
           actions: [
             IconButton(
+              icon: Icon(Icons.add),
               onPressed: () {
                 MaterialPageRoute route = MaterialPageRoute(
                   builder: (context) =>
@@ -37,7 +38,6 @@ class _EventosNinoPageState extends State<EventosNinoPage> {
                 );
                 Navigator.push(context, route);
               },
-              icon: Icon(Icons.add),
             ),
           ],
         ),
