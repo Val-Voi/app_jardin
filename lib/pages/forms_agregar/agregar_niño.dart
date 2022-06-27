@@ -11,7 +11,7 @@ class _AgregarNinoState extends State<AgregarNino> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Formulario Niño'),
+      child: Text('Formulario xd'),
     );
   }
 }

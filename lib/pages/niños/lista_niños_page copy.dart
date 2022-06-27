@@ -81,6 +81,7 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                           itemCount: snap.data.length,
                           itemBuilder: (context, index) {
                             var nino = snap.data[index];
+<<<<<<< Updated upstream
                             return snap.data![index]['nombre']
                                         .toLowerCase()
                                         .contains(buscarNino) ||
@@ -96,6 +97,22 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                           width: 100,
                                           height: 100,
                                           alignment: Alignment.center,
+=======
+                            return Center(
+                                child: Card(
+                              color: color(),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 100,
+                                    height: 100,
+                                    alignment: Alignment.center,
+                                    
+                                    // color: Colors.grey,
+                                    ),
+                                  Expanded(child: Column(
+                                    
+>>>>>>> Stashed changes
 
                                           // color: Colors.grey,
                                           child: Text('probando'),
