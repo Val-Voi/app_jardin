@@ -1,5 +1,4 @@
 import 'package:app_jardin/pages/lista_eventos_page.dart';
-// import 'package:app_jardin/pages/ni%C3%B1os/lista_ni%C3%B1os_page.dart';
 import 'package:app_jardin/pages/niveles/agregar_a_nivel_page.dart';
 import 'package:app_jardin/pages/niveles/menu_niveles_page.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text('Jardin App'),
         backgroundColor: Color.fromARGB(255, 212, 146, 247),
-        leading: Icon(MdiIcons.humanChild),
+        leading: Icon(MdiIcons.humanFemaleBoy),
       ),
       body: ListView(
         children: <Widget>[
@@ -37,12 +36,17 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: ExpansionTileCard(
-              baseColor: Color.fromARGB(120, 131, 56, 236),
-              expandedColor: Color.fromARGB(180, 131, 56, 236),
+              baseColor: Color.fromARGB(200, 130, 192, 241),
+              expandedColor: Color.fromARGB(255, 130, 192, 241),
               key: cardNinos,
-              leading: Icon(MdiIcons.humanChild),
-              title: Text("Gestionar Niños"),
-              subtitle: Text("Listar y agregar"),
+              leading: Icon(
+                MdiIcons.humanChild,
+                color: Colors.black,
+              ),
+              title: Text(
+                "Gestionar Niños",
+                style: TextStyle(color: Colors.black),
+              ),
               children: <Widget>[
                 Divider(
                   thickness: 1.0,
@@ -71,7 +75,7 @@ class _MainPageState extends State<MainPage> {
                       onPressed: (() {
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
-                          return ListaNinosPage(); //debo poner la pagina agregar
+                          return ListaNinosPage();
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -79,28 +83,28 @@ class _MainPageState extends State<MainPage> {
                       }),
                       child: Column(
                         children: <Widget>[
-                          Icon(MdiIcons.formatListBulletedSquare),
+                          Icon(
+                            MdiIcons.formatListBulletedSquare,
+                            color: Colors.black,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
-                          Text('Lista Niños'),
+                          Text(
+                            'Lista Niños',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),
-                    OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 209, 223, 224),
-                        side: BorderSide(
-                            color: Color.fromARGB(255, 47, 0, 255),
-                            style: BorderStyle.solid),
-                      ),
+                    TextButton(
                       onPressed: (() {
                         index_agregar = 0;
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
                           return AgregarPage(
                             index_agregar: index_agregar,
-                          ); //debo poner la pagina agregar
+                          );
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -108,11 +112,17 @@ class _MainPageState extends State<MainPage> {
                       }),
                       child: Column(
                         children: <Widget>[
-                          Icon(Icons.arrow_upward),
+                          Icon(
+                            Icons.add,
+                            color: Colors.black,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
-                          Text('Agregar Niño'),
+                          Text(
+                            'Agregar Niño',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),
@@ -125,12 +135,17 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: ExpansionTileCard(
-              baseColor: Color.fromARGB(170, 255, 0, 110),
-              expandedColor: Color.fromARGB(200, 255, 0, 110),
+              baseColor: Color.fromARGB(210, 235, 93, 127),
+              expandedColor: Color.fromARGB(255, 235, 93, 127),
               key: cardEducadoras,
-              leading: Icon(MdiIcons.humanChild),
-              title: Text("Gestionar Educadoras"),
-              subtitle: Text("Listar y agregar"),
+              leading: Icon(
+                MdiIcons.humanFemaleBoy,
+                color: Colors.black,
+              ),
+              title: Text(
+                "Gestionar Educadoras",
+                style: TextStyle(color: Colors.black),
+              ),
               children: <Widget>[
                 Divider(
                   thickness: 1.0,
@@ -155,11 +170,11 @@ class _MainPageState extends State<MainPage> {
                   buttonHeight: 52.0,
                   buttonMinWidth: 90.0,
                   children: <Widget>[
-                    ElevatedButton(
+                    TextButton(
                       onPressed: (() {
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
-                          return ListaEducadorasPage(); //debo poner la pagina agregar
+                          return ListaEducadorasPage();
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -167,22 +182,28 @@ class _MainPageState extends State<MainPage> {
                       }),
                       child: Column(
                         children: <Widget>[
-                          Icon(Icons.arrow_downward),
+                          Icon(
+                            MdiIcons.formatListBulletedSquare,
+                            color: Colors.black,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
-                          Text('Lista Educadoras'),
+                          Text(
+                            'Lista Educadoras',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: (() {
                         index_agregar = 1;
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
                           return AgregarPage(
                             index_agregar: index_agregar,
-                          ); //debo poner la pagina agregar
+                          );
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -190,11 +211,17 @@ class _MainPageState extends State<MainPage> {
                       }),
                       child: Column(
                         children: <Widget>[
-                          Icon(Icons.arrow_upward),
+                          Icon(
+                            Icons.add,
+                            color: Colors.black,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
-                          Text('Agregar Educadora'),
+                          Text(
+                            'Agregar Educadora',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),
@@ -207,12 +234,15 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: ExpansionTileCard(
-              baseColor: Color.fromARGB(140, 251, 86, 7),
-              expandedColor: Color.fromARGB(200, 251, 86, 7),
+              baseColor: Color.fromARGB(200, 244, 173, 102),
+              expandedColor: Color.fromARGB(255, 244, 173, 102),
               key: cardNiveles,
-              leading: Icon(MdiIcons.humanChild),
-              title: Text("Gestionar Eventos"),
-              subtitle: Text("Listar y agregar"),
+              leading: Icon(
+                MdiIcons.exclamationThick,
+                color: Colors.black,
+              ),
+              title: Text("Gestionar Eventos",
+                  style: TextStyle(color: Colors.black)),
               children: <Widget>[
                 Divider(
                   thickness: 1.0,
@@ -237,11 +267,11 @@ class _MainPageState extends State<MainPage> {
                   buttonHeight: 52.0,
                   buttonMinWidth: 90.0,
                   children: <Widget>[
-                    ElevatedButton(
+                    TextButton(
                       onPressed: (() {
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
-                          return ListaEventosPage(); //debo poner la pagina agregar
+                          return ListaEventosPage();
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -249,15 +279,21 @@ class _MainPageState extends State<MainPage> {
                       }),
                       child: Column(
                         children: <Widget>[
-                          Icon(Icons.arrow_downward),
+                          Icon(
+                            MdiIcons.formatListBulletedSquare,
+                            color: Colors.black,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
-                          Text('Lista Eventos'),
+                          Text(
+                            'Lista Eventos',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: (() {
                         index_agregar = 3;
 
@@ -265,7 +301,7 @@ class _MainPageState extends State<MainPage> {
                             MaterialPageRoute(builder: (context) {
                           return AgregarPage(
                             index_agregar: index_agregar,
-                          ); //debo poner la pagina agregar
+                          );
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -273,11 +309,17 @@ class _MainPageState extends State<MainPage> {
                       }),
                       child: Column(
                         children: <Widget>[
-                          Icon(Icons.arrow_upward),
+                          Icon(
+                            Icons.add,
+                            color: Colors.black,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
-                          Text('Agregar Evento'),
+                          Text(
+                            'Agregar Evento',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),
@@ -293,9 +335,9 @@ class _MainPageState extends State<MainPage> {
               baseColor: Color.fromARGB(130, 255, 190, 11),
               expandedColor: Color.fromARGB(255, 255, 190, 11),
               key: cardEventos,
-              leading: Icon(MdiIcons.humanChild),
-              title: Text("Gestionar niveles"),
-              subtitle: Text("Listar y agregar"),
+              leading: Icon(Icons.numbers, color: Colors.black),
+              title: Text("Gestionar niveles",
+                  style: TextStyle(color: Colors.black)),
               children: <Widget>[
                 Divider(
                   thickness: 1.0,
@@ -320,11 +362,11 @@ class _MainPageState extends State<MainPage> {
                   buttonHeight: 52.0,
                   buttonMinWidth: 90.0,
                   children: <Widget>[
-                    ElevatedButton(
+                    TextButton(
                       onPressed: (() {
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
-                          return MenuNivelesPage(); //debo poner la pagina agregar
+                          return MenuNivelesPage();
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -332,19 +374,25 @@ class _MainPageState extends State<MainPage> {
                       }),
                       child: Column(
                         children: <Widget>[
-                          Icon(Icons.arrow_downward),
+                          Icon(
+                            MdiIcons.formatListBulletedSquare,
+                            color: Colors.black,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
-                          Text('Ver Niveles'),
+                          Text(
+                            'Ver Niveles',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: (() {
                         MaterialPageRoute route =
                             MaterialPageRoute(builder: (context) {
-                          return AgregarANivelPage(); //debo poner la pagina agregar
+                          return AgregarANivelPage();
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -352,15 +400,21 @@ class _MainPageState extends State<MainPage> {
                       }),
                       child: Column(
                         children: <Widget>[
-                          Icon(Icons.arrow_upward),
+                          Icon(
+                            Icons.arrow_upward,
+                            color: Colors.black,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
-                          Text('Agregar a Nivel'),
+                          Text(
+                            'Agregar a Nivel',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: (() {
                         index_agregar = 2;
 
@@ -368,7 +422,7 @@ class _MainPageState extends State<MainPage> {
                             MaterialPageRoute(builder: (context) {
                           return AgregarPage(
                             index_agregar: index_agregar,
-                          ); //debo poner la pagina agregar
+                          );
                         });
                         Navigator.push(context, route).then((value) {
                           setState(() {});
@@ -376,11 +430,17 @@ class _MainPageState extends State<MainPage> {
                       }),
                       child: Column(
                         children: <Widget>[
-                          Icon(Icons.arrow_upward),
+                          Icon(
+                            Icons.add,
+                            color: Colors.black,
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
-                          Text('Nuevo Nivel'),
+                          Text(
+                            'Nuevo Nivel',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),
