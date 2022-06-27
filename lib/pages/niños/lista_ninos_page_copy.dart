@@ -1,8 +1,6 @@
 import 'package:app_jardin/pages/forms_editar/editar_ni%C3%B1o.dart';
 import 'package:app_jardin/providers/jardin_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:intl/date_symbol_data_file.dart';
 import 'eventos_niño_page.dart';
 
 class ListaNinosPage extends StatefulWidget {
@@ -15,11 +13,11 @@ class ListaNinosPage extends StatefulWidget {
 class _ListaNinosPageState extends State<ListaNinosPage> {
   int _contadorColor = 0;
   List<Color> colores = [
-    Color.fromARGB(255, 255, 190, 11),
-    Color.fromARGB(255, 251, 86, 7),
-    Color.fromARGB(255, 255, 0, 110),
-    Color.fromARGB(255, 131, 56, 236),
-    Color.fromARGB(255, 58, 134, 255),
+    Color.fromARGB(255, 104, 228, 193),
+    Color.fromARGB(255, 244, 173, 102),
+    Color.fromARGB(255, 235, 93, 127),
+    Color.fromARGB(255, 185, 123, 243),
+    Color.fromARGB(255, 130, 192, 241),
   ];
   String buscarNino = "";
 
@@ -215,28 +213,30 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                               ),
                                             ),
                                             Container(
-                                              width: 270.0,
+                                              width: 280.0,
                                               child: Text(
                                                 'RUT: ${nino['rut']}',
                                                 // '\nNacimiento: ${DateFormat.yMd().format(DateTime.parse(nino['fecha_nacimiento']))}',
                                                 style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 16.0,
+                                                  fontSize: 16.5,
                                                 ),
                                               ),
                                             ),
                                             Divider(
-                                              indent: 70.0,
-                                              endIndent: 140,
-                                              thickness: 5,
-                                              color: Colors.black,
+                                              indent: 17.0,
+                                              endIndent: 80,
+                                              thickness: 1,
+                                              color: Colors.white,
                                             ),
                                             Container(
+                                              height: 30,
+                                              width: 280,
                                               child: Text(
                                                 'Contacto: ${nino['contacto_apoderado']}',
                                                 style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 16.0,
+                                                  fontSize: 16.5,
                                                 ),
                                               ),
                                             ),

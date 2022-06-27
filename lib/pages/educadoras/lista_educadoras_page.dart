@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
 import '../../providers/jardin_provider.dart';
 import '../forms_editar/editar_educadora.dart';
 
@@ -14,11 +13,11 @@ class ListaEducadorasPage extends StatefulWidget {
 class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
   int _contadorColor = 0;
   List<Color> colores = [
-    Color.fromARGB(255, 88, 168, 252),
-    Color.fromARGB(255, 234, 100, 132),
+    Color.fromARGB(255, 104, 228, 193),
+    Color.fromARGB(255, 244, 173, 102),
+    Color.fromARGB(255, 235, 93, 127),
     Color.fromARGB(255, 185, 123, 243),
-    Color.fromARGB(255, 244, 174, 102),
-    Color.fromARGB(255, 100, 226, 210),
+    Color.fromARGB(255, 130, 192, 241),
   ];
   String buscarEducadora = "";
 
@@ -27,7 +26,7 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Lista Educadoras'),
-        backgroundColor: Color.fromARGB(255, 136, 236, 74),
+        backgroundColor: Color.fromARGB(255, 212, 146, 247),
         leading: BackButton(),
       ),
       body: Padding(
@@ -176,29 +175,31 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
                                             ),
                                           ),
                                           Container(
-                                            width: 270.0,
+                                            width: 280.0,
                                             child: Text(
                                               'RUT: ${profe['rut']}',
                                               // '\nNacimiento: ${DateFormat.yMd().format(DateTime.parse(nino['fecha_nacimiento']))}',
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 16.0,
+                                                fontSize: 16.5,
                                               ),
                                             ),
                                           ),
                                           Divider(
-                                            indent: 70.0,
-                                            endIndent: 140,
-                                            thickness: 5,
-                                            color: Colors.black,
+                                            indent: 17.0,
+                                            endIndent: 80,
+                                            thickness: 1,
+                                            color: Colors.white,
                                           ),
                                           Container(
+                                            height: 50,
+                                            width: 280,
                                             child: Text(
                                               'Contacto: ${profe['telefono_contacto']}'
                                               '\nCorreo: ${profe['correo_contacto']}',
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 16.0,
+                                                fontSize: 16.5,
                                               ),
                                             ),
                                           ),

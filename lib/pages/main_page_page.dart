@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Jardin App'),
-        backgroundColor: Color.fromARGB(255, 136, 236, 74),
+        backgroundColor: Color.fromARGB(255, 212, 146, 247),
         leading: Icon(MdiIcons.humanChild),
       ),
       body: ListView(

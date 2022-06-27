@@ -25,10 +25,12 @@ class JardinProvider {
 
   Future<LinkedHashMap<String, dynamic>> ninoAgregar(
       String nombre,
-      DateTime fecha_nacimiento,
+      String apellido,
+      //DateTime fecha_nacimiento,
       String rut,
       String contacto_apoderado,
-      int niveles_id) async {
+      //int niveles_id
+      ) async {
     var uri = Uri.parse('$apiURL/niveles');
     var respuesta = await http.post(uri,
         headers: <String, String>{
@@ -37,10 +39,11 @@ class JardinProvider {
         },
         body: jsonEncode(<String, dynamic>{
           'nombre': nombre,
-          'fecha_nacimiento': fecha_nacimiento,
+          'apellido': apellido,
+          //'fecha_nacimiento': fecha_nacimiento,
           'rut': rut,
           'contacto_apoderado': contacto_apoderado,
-          'niveles_id': niveles_id,
+          //'niveles_id': niveles_id,
         }));
     return json.decode(respuesta.body);
   }
