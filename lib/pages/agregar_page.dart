@@ -40,15 +40,15 @@ class _AgregarPageState extends State<AgregarPage> {
                 alignment: Alignment.center,
               ),
               Container(
-                  height: 295.0,
+                  height: 600.0,
                   width: 333.0,
                   child: TabBarView(
                       physics: NeverScrollableScrollPhysics(),
                       children: [
-                        AgregarNino(),
-                        AgregarEducadora(),
+                        AgregarNinoPage(),
+                        AgregarEducadoraPage(),
                         AgregarNivel(),
-                        AgregarEvento()
+                        AgregarEventoPage()
                       ])),
             ],
           ),
