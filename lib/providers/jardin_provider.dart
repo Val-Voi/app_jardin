@@ -226,6 +226,17 @@ class JardinProvider {
     return json.decode(respuesta.body);
   }
 
+  Future<String> getNinoNivel(String id_nino) async {
+    var uri = Uri.parse('$apiURL/ninos/$id_nino/nivel');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return respuesta.body;
+    } else {
+      return '';
+    }
+  }
+
   Future<LinkedHashMap<String, dynamic>> ninoNivel(
       int id_nino, int id_nivel) async {
     var uri = Uri.parse('$apiURL/ninos/$id_nino/nivel');

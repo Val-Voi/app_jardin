@@ -106,13 +106,29 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
-                                              subtitle: Text(
-                                                'Nivel ${nino['niveles_id']}',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16.0,
-                                                ),
-                                              ),
+                                              subtitle: FutureBuilder(
+                                                  future: JardinProvider()
+                                                      .getNinoNivel(nino['id']
+                                                          .toString()),
+                                                  builder: (context, snapshot) {
+                                                    if (!snapshot.hasData) {
+                                                      return Text(
+                                                        'Niño sin nivel',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 16.0,
+                                                        ),
+                                                      );
+                                                    }
+
+                                                    return Text(
+                                                      'Nivel ${snapshot.data}',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    );
+                                                  }),
                                               trailing: PopupMenuButton(
                                                 itemBuilder: (context) => [
                                                   PopupMenuItem(
