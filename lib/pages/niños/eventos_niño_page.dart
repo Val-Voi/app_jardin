@@ -1,3 +1,4 @@
+import 'package:app_jardin/pages/forms_editar/editar_evento.dart';
 import 'package:app_jardin/pages/main_page_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -94,7 +95,7 @@ class _EventosNinoPageState extends State<EventosNinoPage> {
                                               MaterialPageRoute route =
                                                   MaterialPageRoute(
                                                 builder: (context) =>
-                                                    MainPage(), //TODO: REDIRIGIR A PAGINA DE EDITAR EVENTO
+                                                    EditarEventoPage(), //TODO: REDIRIGIR A PAGINA DE EDITAR EVENTO
                                               );
                                               Navigator.push(context, route);
                                             } else if (opcion == 'borrar') {

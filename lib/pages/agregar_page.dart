@@ -23,7 +23,7 @@ class _AgregarPageState extends State<AgregarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jardin App'),
+        title: Text('Agregar datos'),
         backgroundColor: Color.fromARGB(255, 136, 236, 74),
         leading: BackButton(),
       ),
