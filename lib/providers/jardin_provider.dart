@@ -268,6 +268,17 @@ class JardinProvider {
     return json.decode(respuesta.body);
   }
 
+  Future<String> getEducadoraNivel(String id_educadora) async {
+    var uri = Uri.parse('$apiURL/educadoras/$id_educadora/nivel');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return respuesta.body;
+    } else {
+      return '';
+    }
+  }
+
   //--------------------------PROVIDER EVENTOS------------------------
   // agregar evento
   Future<LinkedHashMap<String, dynamic>> eventoAgregar(String nombre) async {

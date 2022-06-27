@@ -26,7 +26,7 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jardin App'),
+        title: Text('Lista Educadoras'),
         backgroundColor: Color.fromARGB(255, 136, 236, 74),
         leading: BackButton(),
       ),
@@ -91,13 +91,30 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            subtitle: Text(
-                                              'Nivel ${profe['niveles_id']}',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16.0,
-                                              ),
-                                            ),
+                                            subtitle: FutureBuilder(
+                                                future: JardinProvider()
+                                                    .getEducadoraNivel(
+                                                        profe['id'].toString()),
+                                                builder: (context, snapshot) {
+                                                  print(snapshot);
+                                                  if (snapshot.data == '') {
+                                                    return Text(
+                                                      'Sin nivel asignado',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return Text(
+                                                      'Nivel ${snapshot.data}',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16.0,
+                                                      ),
+                                                    );
+                                                  }
+                                                }),
                                             trailing: PopupMenuButton(
                                               itemBuilder: (context) => [
                                                 PopupMenuItem(

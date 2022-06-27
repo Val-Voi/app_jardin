@@ -37,12 +37,12 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: ExpansionTileCard(
-              baseColor: Colors.cyan[50],
-              expandedColor: Colors.red[50],
+              baseColor: Color.fromARGB(120, 131, 56, 236),
+              expandedColor: Color.fromARGB(180, 131, 56, 236),
               key: cardNinos,
               leading: Icon(MdiIcons.humanChild),
               title: Text("Gestionar Niños"),
-              subtitle: Text("niños"),
+              subtitle: Text("Listar y agregar"),
               children: <Widget>[
                 Divider(
                   thickness: 1.0,
@@ -56,7 +56,9 @@ class _MainPageState extends State<MainPage> {
                       vertical: 8.0,
                     ),
                     child: Text(
-                      "sd jks dksa ",
+                      "Presione sobre 'Lista Niños' para ver una lista completa de los niños del jardín. En esta lista" +
+                          " puede editar y borrar sus datos, así como también comprobar los eventos" +
+                          " asociados a cada niño.\nPresione sobre 'Agregar Niño' para ingresar datos de un niño nuevo.",
                     ),
                   ),
                 ),
@@ -123,12 +125,12 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: ExpansionTileCard(
-              baseColor: Colors.cyan[50],
-              expandedColor: Colors.red[50],
+              baseColor: Color.fromARGB(170, 255, 0, 110),
+              expandedColor: Color.fromARGB(200, 255, 0, 110),
               key: cardEducadoras,
               leading: Icon(MdiIcons.humanChild),
               title: Text("Gestionar Educadoras"),
-              subtitle: Text("educadoras"),
+              subtitle: Text("Listar y agregar"),
               children: <Widget>[
                 Divider(
                   thickness: 1.0,
@@ -142,7 +144,9 @@ class _MainPageState extends State<MainPage> {
                       vertical: 8.0,
                     ),
                     child: Text(
-                      "dsa idojis od",
+                      "Presione sobre 'Lista Educadoras' para ver una lista completa de las educadoras del jardín. En esta lista" +
+                          " puede ver, editar y borrar los datos de cada una de ellas." +
+                          " \nPresione sobre 'Agregar Educadora' para ingresar datos de una educadora nueva.",
                     ),
                   ),
                 ),
@@ -203,12 +207,12 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: ExpansionTileCard(
-              baseColor: Colors.cyan[50],
-              expandedColor: Colors.red[50],
+              baseColor: Color.fromARGB(140, 251, 86, 7),
+              expandedColor: Color.fromARGB(200, 251, 86, 7),
               key: cardNiveles,
               leading: Icon(MdiIcons.humanChild),
               title: Text("Gestionar Eventos"),
-              subtitle: Text("eventos"),
+              subtitle: Text("Listar y agregar"),
               children: <Widget>[
                 Divider(
                   thickness: 1.0,
@@ -222,7 +226,9 @@ class _MainPageState extends State<MainPage> {
                       vertical: 8.0,
                     ),
                     child: Text(
-                      "sdjfdskfdsf",
+                      "Presione sobre 'Lista Eventos' para ver una lista de todos los eventos ocurridos en el jardín. En esta lista" +
+                          " puede ver los datos, editar y borrar cada evento." +
+                          " \nPresione sobre 'Agregar Evento' para ingresar un evento nuevo.",
                     ),
                   ),
                 ),
@@ -284,12 +290,12 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: ExpansionTileCard(
-              baseColor: Colors.cyan[50],
-              expandedColor: Colors.red[50],
+              baseColor: Color.fromARGB(130, 255, 190, 11),
+              expandedColor: Color.fromARGB(255, 255, 190, 11),
               key: cardEventos,
               leading: Icon(MdiIcons.humanChild),
               title: Text("Gestionar niveles"),
-              subtitle: Text("niveles"),
+              subtitle: Text("Listar y agregar"),
               children: <Widget>[
                 Divider(
                   thickness: 1.0,
@@ -303,7 +309,9 @@ class _MainPageState extends State<MainPage> {
                       vertical: 8.0,
                     ),
                     child: Text(
-                      "sdjfdskfdsf",
+                      "Presione sobre 'Lista Niveles' para ver una lista de todos los niveles del jardín. En esta lista" +
+                          " puede editar y borrar cada nivel, así como también comprobar las personas" +
+                          " asociadas a este.\nPresione sobre 'Agregar a Nivel' para asociar a un niño o educadora a un Nivel.\nPresione sobre 'Agregar Nivel' para ingresar un nivel nuevo.",
                     ),
                   ),
                 ),

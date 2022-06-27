@@ -15,11 +15,11 @@ class ListaNinosPage extends StatefulWidget {
 class _ListaNinosPageState extends State<ListaNinosPage> {
   int _contadorColor = 0;
   List<Color> colores = [
-    Color.fromARGB(255, 88, 168, 252),
-    Color.fromARGB(255, 234, 100, 132),
-    Color.fromARGB(255, 185, 123, 243),
-    Color.fromARGB(255, 244, 174, 102),
-    Color.fromARGB(255, 100, 226, 210),
+    Color.fromARGB(255, 255, 190, 11),
+    Color.fromARGB(255, 251, 86, 7),
+    Color.fromARGB(255, 255, 0, 110),
+    Color.fromARGB(255, 131, 56, 236),
+    Color.fromARGB(255, 58, 134, 255),
   ];
   String buscarNino = "";
 
@@ -33,7 +33,7 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Niños'),
+          title: Text('Lista Niños'),
           backgroundColor: Color.fromARGB(255, 212, 146, 247),
           leading: BackButton(),
         ),

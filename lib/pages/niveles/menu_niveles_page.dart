@@ -13,7 +13,7 @@ class _MenuNivelesPageState extends State<MenuNivelesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jardin App'),
+        title: Text('Lista de Niveles'),
         backgroundColor: Color.fromARGB(255, 136, 236, 74),
         leading: BackButton(),
       ),

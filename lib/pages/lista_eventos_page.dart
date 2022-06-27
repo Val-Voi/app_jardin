@@ -13,7 +13,7 @@ class _ListaEventosPageState extends State<ListaEventosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jardin App'),
+        title: Text('Lista de Eventos'),
         backgroundColor: Color.fromARGB(255, 136, 236, 74),
         leading: BackButton(),
       ),
