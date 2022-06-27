@@ -230,6 +230,21 @@ class JardinProvider {
     return json.decode(respuesta.body);
   }
 
+  Future<LinkedHashMap<String, dynamic>> ninoNivel(
+      int id_nino, int id_nivel) async {
+    var uri = Uri.parse('$apiURL/ninos/$id_nino/nivel');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'niveles_id': id_nivel,
+        }));
+    //agregarEducadoraNivel(niveles_id);
+    return json.decode(respuesta.body);
+  }
+
   //--------------------------PROVIDER EVENTOS------------------------
   // agregar evento
   Future<LinkedHashMap<String, dynamic>> eventoAgregar(String nombre) async {
