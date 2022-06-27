@@ -1,7 +1,10 @@
 import 'package:app_jardin/pages/forms_editar/my_input_theme.dart';
 import 'package:app_jardin/pages/forms_editar/string_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../../providers/jardin_provider.dart';
 
 class AgregarNinoPage extends StatefulWidget {
   AgregarNinoPage({Key? key}) : super(key: key);
@@ -12,8 +15,22 @@ class AgregarNinoPage extends StatefulWidget {
 
 class _AgregarNinoPageState extends State<AgregarNinoPage> {
   final _formKey = GlobalKey<FormState>();
-  // late DateTime _dateTime;
+  DateTime fechaSeleccionada = DateTime.now();
+  var ffecha = DateFormat('dd-MM-yyyy');
 
+  /// la fecha en formato español el programa no la tomaba
+  String errNombre = '';
+  String errRut = '';
+  String errContacto = '';
+  String errApellido = '';
+  String errNivel = '';
+
+  TextEditingController nombreCtrl = TextEditingController();
+  TextEditingController apellidoCtrl = TextEditingController();
+  TextEditingController contactoCtrl = TextEditingController();
+  TextEditingController rutCtrl = TextEditingController();
+  TextEditingController nivelCtrl = TextEditingController();
+  TextEditingController fechaNacCtrl = TextEditingController();
   // valor inicial
   String dropdownvalue = 'Nivel 1';
 
@@ -25,6 +42,7 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
     'Nivel 4',
     'Nivel 5',
   ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,18 +61,33 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
 
               //NOMBRE
               TextFormField(
+                controller: nombreCtrl,
                 decoration: InputDecoration(
                   labelText: "Nombre",
                   helperText: "",
-                  hintText: "Juanito Tft",
+                  hintText: "Juan",
                 ),
               ),
 
               //Fin NOMBRE
 
+              //APELLIDO
+              TextFormField(
+                controller: rutCtrl,
+                decoration: InputDecoration(
+                  labelText: "Apellido",
+                  helperText: "",
+                  hintText: "Gonzales",
+                ),
+              ),
+
+              //APELLIDO
+
               //RUT
               TextFormField(
+                controller: rutCtrl,
                 keyboardType: TextInputType.numberWithOptions(),
+                maxLength: 12,
                 decoration: InputDecoration(
                   labelText: "Rut",
                   helperText: "",
@@ -64,20 +97,55 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
 
               //Fin RUT
 
-              //FECHA NAC
-              //  Text(_dateTime == null ? 'No se ha seleccionado nada': _dateTime.toString())
-              //  showDatePicker(
-              //   context: context,
-              //   initialDate: DateTime.now(),
-              //   firstDate: DateTime(2001),
-              //   lastDate: DateTime(2022)
-              //  ).then((date){
-              //   setState(() {
-              //                _dateTime = date;
-              //                 });
-              //  })
+              //Contacto
+              TextFormField(
+                controller: contactoCtrl,
+                keyboardType: TextInputType.numberWithOptions(
+                    decimal: false, signed: true),
+                maxLength: 8,
+                decoration: InputDecoration(
+                  labelText: "Número de contacto",
+                  helperText: "",
+                  hintText: "xxxxxxxx",
+                  prefix: Text("+569"),
+                ),
+              ),
 
-              //Fin fehca nac
+              //fin contacto
+
+              Row(
+                children: [
+                  Text('Fecha de nacimiento:', style: TextStyle(fontSize: 16)),
+                  Text(ffecha.format(fechaSeleccionada),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Spacer(),
+                  TextButton(
+                    child: Icon(MdiIcons.calendar),
+                    onPressed: () async {
+                      var respuesta = await JardinProvider().ninoAgregar(
+                        nombreCtrl.text.trim(),
+                        apellidoCtrl.text.trim(),
+                        // fechaNacCtrl.text.trim(),
+                        rutCtrl.text.trim(),
+                        contactoCtrl.text.trim(),
+                        //nivelCtrl..trim(),
+                      );
+
+                      if (respuesta['messages'] != null) {
+                        print('error');
+                        if (respuesta['errors']['nombre'] != null) {
+                          errNombre = respuesta['errors']['nombre'][0];
+                        }
+
+                        setState(() {});
+                        return;
+                      }
+                      print('no error');
+                    },
+                  ),
+                ],
+              ),
             ]
                 .map((child) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
