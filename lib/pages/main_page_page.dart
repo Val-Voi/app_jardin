@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:app_jardin/pages/agregar_page.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
-import 'package:app_jardin/pages/niños/lista_niños_page copy.dart';
+import 'package:app_jardin/pages/niños/lista_ninos_page_copy.dart';
 import 'educadoras/lista_educadoras_page.dart';
 
 class MainPage extends StatefulWidget {
