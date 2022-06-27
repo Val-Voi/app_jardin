@@ -1,5 +1,6 @@
 import 'package:app_jardin/pages/forms_editar/my_input_theme.dart';
 import 'package:app_jardin/pages/forms_editar/string_extensions.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -16,12 +17,15 @@ class _AgregarEducadoraPageState extends State<AgregarEducadoraPage> {
   String errTelefono = '';
   String errEmail = '';
   String errNivel = '';
+  String? selectedNivel;
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController nombreCtrl = TextEditingController();
   TextEditingController rutCtrl = TextEditingController();
   TextEditingController telefonoCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController nivelCtrl = TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
 
   // Initial Selected Value
   String dropdownvalue = 'Nivel 1';
@@ -45,107 +49,164 @@ class _AgregarEducadoraPageState extends State<AgregarEducadoraPage> {
       home: Scaffold(
         body: Form(
           key: _formKey,
-          child: ListView(
-            padding: const EdgeInsets.all(32.0),
-            children: <Widget>[
-              // CampoNombre(),
+          child:
+              ListView(padding: const EdgeInsets.all(32.0), children: <Widget>[
+            // CampoNombre(),
 
-              //NOMBRE
-              TextFormField(
-                controller: nombreCtrl,
-                decoration: InputDecoration(
-                  labelText: "Nombre",
-                  helperText: "",
-                  hintText: "Ana Rodhes",
-                ),
+            //NOMBRE
+            TextFormField(
+              controller: nombreCtrl,
+              decoration: InputDecoration(
+                labelText: "Nombre",
+                helperText: "",
+                hintText: "Ana Rodhes",
               ),
+            ),
 
-              //Fin NOMBRE
+            //Fin NOMBRE
 
-              //RUT
-              TextFormField(
-                controller: rutCtrl,
-                keyboardType: TextInputType.numberWithOptions(),
-                decoration: InputDecoration(
-                  labelText: "Rut",
-                  helperText: "",
-                  hintText: "20.320.487-6",
-                ),
+            //RUT
+            TextFormField(
+              controller: rutCtrl,
+              keyboardType: TextInputType.numberWithOptions(),
+              decoration: InputDecoration(
+                labelText: "Rut",
+                helperText: "",
+                hintText: "20.320.487-6",
               ),
+            ),
 
-              //Fin RUT
+            //Fin RUT
 
-              //TELEFONO
-              TextFormField(
-                controller: telefonoCtrl,
-                keyboardType: TextInputType.numberWithOptions(
-                    decimal: false, signed: true),
-                maxLength: 8,
-                decoration: InputDecoration(
-                  labelText: "Telefóno",
-                  helperText: "",
-                  hintText: "",
-                  prefix: Text("+569"),
-                ),
+            //TELEFONO
+            TextFormField(
+              controller: telefonoCtrl,
+              keyboardType:
+                  TextInputType.numberWithOptions(decimal: false, signed: true),
+              maxLength: 8,
+              decoration: InputDecoration(
+                labelText: "Telefóno",
+                helperText: "",
+                hintText: "",
+                prefix: Text("+569"),
               ),
+            ),
 
-              //Fin TELEFONO
+            //Fin TELEFONO
 
-              //Correo
-              TextFormField(
-                controller: emailCtrl,
-                keyboardType: TextInputType.emailAddress,
-                validator: (s) {
-                  if (!s!.isValidEmail()) {
-                    return "Ingrese Email Valido";
-                  }
-                },
-                decoration: InputDecoration(
-                  labelText: "E-mail",
-                  helperText: "",
-                  hintText: "email@ejemplo.com",
-                ),
+            //Correo
+            TextFormField(
+              controller: emailCtrl,
+              keyboardType: TextInputType.emailAddress,
+              validator: (s) {
+                if (!s!.isValidEmail()) {
+                  return "Ingrese Email Valido";
+                }
+              },
+              decoration: InputDecoration(
+                labelText: "E-mail",
+                helperText: "",
+                hintText: "email@ejemplo.com",
               ),
+            ),
 
-              //Fin correo
+            //Fin correo
 
-              //DROPDOWN DE NIVELES
-              SizedBox(
-                width: 240,
-                child: DropdownButtonFormField<String>(
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(width: 3, color: Colors.blue),
-                    ),
-                  ),
-                  value: dropdownvalue,
-                  icon: Icon(MdiIcons.arrowDown),
-                  items: items.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(items),
+            //DROPDOWN DE NIVELES
+
+            FutureBuilder(
+                future: JardinProvider().getNiveles(),
+                builder: (context, AsyncSnapshot snap) {
+                  if (!snap.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
                     );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownvalue = newValue!;
-                    });
-                  },
-                ),
-              )
+                  }
+                  List niveles = snap.data;
+                  return DropdownButtonHideUnderline(
+                    child: DropdownButton2(
+                      isExpanded: true,
+                      hint: Text(
+                        'Seleccionar nivel',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context).hintColor,
+                        ),
+                      ),
+                      items: niveles
+                          .map((item) => DropdownMenuItem<String>(
+                                //value: item['nombre'] + ' ' + item['apellido'],
+                                value: item['id'].toString(),
 
-              //FINAL DROPDOWN DE NIVELES
-            ]
-                .map((child) => Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: child,
-                    ))
-                .toList(),
-          ),
+                                // id: item['id'];
+                                child: Text(
+                                  item['nombre'],
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: selectedNivel,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedNivel = value as String;
+                          print(selectedNivel);
+                        });
+                      },
+                      buttonHeight: 40,
+                      buttonWidth: 200,
+                      itemHeight: 40,
+                      dropdownMaxHeight: 200,
+                      searchController: textEditingController,
+                      searchInnerWidget: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 8,
+                          bottom: 4,
+                          right: 8,
+                          left: 8,
+                        ),
+                        child: TextFormField(
+                          controller: textEditingController,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 8,
+                            ),
+                            hintText: 'Nivel',
+                            hintStyle: const TextStyle(fontSize: 12),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                      ),
+                      searchMatchFn: (item, searchValue) {
+                        return (item.child
+                            .toString()
+                            .toLowerCase()
+                            .contains(searchValue.toLowerCase()));
+                      },
+                      onMenuStateChange: (isOpen) {
+                        if (!isOpen) {
+                          textEditingController.clear();
+                        }
+                      },
+                    ),
+                  );
+                }),
+
+            //FINAL DROPDOWN DE NIVELES
+          ]),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            print(nombreCtrl.text.trim());
+            print(rutCtrl.text.trim());
+            print(telefonoCtrl.text.trim());
+            print(emailCtrl.text.trim());
+
             var respuesta = await JardinProvider().educadoraAgregar(
                 nombreCtrl.text.trim(),
                 rutCtrl.text.trim(),
@@ -156,6 +217,19 @@ class _AgregarEducadoraPageState extends State<AgregarEducadoraPage> {
               print('error');
               if (respuesta['errors']['nombre'] != null) {
                 errNombre = respuesta['errors']['nombre'][0];
+              }
+
+              setState(() {});
+              return;
+            }
+            print(respuesta);
+            var respuestanivel = await JardinProvider()
+                .educadoraNivel(respuesta['id'], int.parse(selectedNivel!));
+
+            if (respuestanivel['messages'] != null) {
+              print('error');
+              if (respuestanivel['errors']['nombre'] != null) {
+                errNombre = respuestanivel['errors']['nombre'][0];
               }
 
               setState(() {});

@@ -11,7 +11,7 @@ class EducadoraNivelForm extends StatefulWidget {
 }
 
 class _EducadoraNivelFormState extends State<EducadoraNivelForm> {
-  String? selectedNino;
+  String? selectedEducadora;
   String? selectedNivel;
   final TextEditingController textEditingController = TextEditingController();
   String errNino = '';
@@ -65,11 +65,11 @@ class _EducadoraNivelFormState extends State<EducadoraNivelForm> {
                                 ),
                               ))
                           .toList(),
-                      value: selectedNino,
+                      value: selectedEducadora,
                       onChanged: (value) {
                         setState(() {
-                          selectedNino = value as String;
-                          print(selectedNino);
+                          selectedEducadora = value as String;
+                          print(selectedEducadora);
                         });
                       },
                       buttonHeight: 40,
@@ -217,9 +217,9 @@ class _EducadoraNivelFormState extends State<EducadoraNivelForm> {
               child: ElevatedButton(
                   child: Text('Agregar'),
                   onPressed: () async {
-                    var respuesta = await JardinProvider().nivelAgregar(
-                      nombreCtrl.text.trim(),
-                    );
+                    var respuesta = await JardinProvider().educadoraNivel(
+                        int.parse(selectedEducadora!),
+                        int.parse(selectedNivel!));
 
                     if (respuesta['messages'] != null) {
                       print('error');

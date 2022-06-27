@@ -105,13 +105,9 @@ class JardinProvider {
 
   //agregar educadora
 
-  Future<LinkedHashMap<String, dynamic>> educadoraAgregar(
-      String nombre,
-      String rut,
-      String telefono_contacto,
-      String correo_contacto,
-      int niveles_id) async {
-    var uri = Uri.parse('$apiURL/niveles');
+  Future<LinkedHashMap<String, dynamic>> educadoraAgregar(String nombre,
+      String rut, String telefono_contacto, String correo_contacto) async {
+    var uri = Uri.parse('$apiURL/educadoras');
     var respuesta = await http.post(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -120,8 +116,8 @@ class JardinProvider {
         body: jsonEncode(<String, dynamic>{
           'nombre': nombre,
           'rut': rut,
-          'contacto_apoderado': correo_contacto,
-          'fecha_nacimiento': telefono_contacto,
+          'telefono_contacto': telefono_contacto,
+          'correo_contacto': correo_contacto,
         }));
     //agregarEducadoraNivel(niveles_id);
     return json.decode(respuesta.body);
@@ -240,6 +236,22 @@ class JardinProvider {
         },
         body: jsonEncode(<String, dynamic>{
           'niveles_id': id_nivel,
+        }));
+    //agregarEducadoraNivel(niveles_id);
+    return json.decode(respuesta.body);
+  }
+
+  Future<LinkedHashMap<String, dynamic>> educadoraNivel(
+      int id_educadora, int id_nivel) async {
+    var uri = Uri.parse('$apiURL/educadoranivel');
+    var respuesta = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'niveles_id': id_nivel,
+          'educadoras_id': id_educadora
         }));
     //agregarEducadoraNivel(niveles_id);
     return json.decode(respuesta.body);
