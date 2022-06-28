@@ -29,7 +29,7 @@ class JardinProvider {
     //DateTime fecha_nacimiento,
     String rut,
     String contacto_apoderado,
-    //int niveles_id
+    //int nivel_id
   ) async {
     var uri = Uri.parse('$apiURL/niveles');
     var respuesta = await http.post(uri,
@@ -43,7 +43,7 @@ class JardinProvider {
           //'fecha_nacimiento': fecha_nacimiento,
           'rut': rut,
           'contacto_apoderado': contacto_apoderado,
-          //'niveles_id': niveles_id,
+          //'nivel_id': nivel_id,
         }));
     return json.decode(respuesta.body);
   }
@@ -86,7 +86,7 @@ class JardinProvider {
           'fecha_nacimiento': fecha_nacimiento,
           'rut': rut,
           'contacto_apoderado': contacto_apoderado,
-          'niveles_id': niveles_id,
+          'nivel_id': niveles_id,
         }));
 
     return json.decode(respuesta.body);
