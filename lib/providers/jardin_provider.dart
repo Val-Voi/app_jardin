@@ -24,13 +24,13 @@ class JardinProvider {
   //agregar un niño
 
   Future<LinkedHashMap<String, dynamic>> ninoAgregar(
-      String nombre,
-      String apellido,
-      //DateTime fecha_nacimiento,
-      String rut,
-      String contacto_apoderado,
-      //int niveles_id
-      ) async {
+    String nombre,
+    String apellido,
+    //DateTime fecha_nacimiento,
+    String rut,
+    String contacto_apoderado,
+    //int nivel_id
+  ) async {
     var uri = Uri.parse('$apiURL/niveles');
     var respuesta = await http.post(uri,
         headers: <String, String>{
@@ -43,7 +43,7 @@ class JardinProvider {
           //'fecha_nacimiento': fecha_nacimiento,
           'rut': rut,
           'contacto_apoderado': contacto_apoderado,
-          //'niveles_id': niveles_id,
+          //'nivel_id': nivel_id,
         }));
     return json.decode(respuesta.body);
   }
@@ -86,7 +86,7 @@ class JardinProvider {
           'fecha_nacimiento': fecha_nacimiento,
           'rut': rut,
           'contacto_apoderado': contacto_apoderado,
-          'niveles_id': niveles_id,
+          'nivel_id': niveles_id,
         }));
 
     return json.decode(respuesta.body);
@@ -282,6 +282,28 @@ class JardinProvider {
     }
   }
 
+  Future<List<dynamic>> getNivelEducadoras(String id_nivel) async {
+    var uri = Uri.parse('$apiURL/niveles/$id_nivel/educadoras');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<dynamic>> getNivelNinos(String id_nivel) async {
+    var uri = Uri.parse('$apiURL/niveles/$id_nivel/ninos');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
+  }
+
   //--------------------------PROVIDER EVENTOS------------------------
   // agregar evento
   Future<LinkedHashMap<String, dynamic>> eventoAgregar(String nombre) async {
@@ -351,5 +373,26 @@ class JardinProvider {
         }));
     //agregarEducadoraNivel(niveles_id);
     return json.decode(respuesta.body);
+  }
+
+  //--------------------------PROVIDER IMAGEN------------------------
+
+  postDataImagen(_data, _url) async {
+    return await http.post(Uri.http('10.0.2.2:8000', _url),
+        body: jsonEncode(_data),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        });
+  }
+
+  Future<String> getDataImagen(ruta) async {
+    ruta = '/api/imagen/1656387706.png';
+    var respuesta = await http.get(Uri.http('10.0.2.2:8000', ruta));
+    if (respuesta.statusCode == 200) {
+      return respuesta.body;
+    } else {
+      return '';
+    }
   }
 }

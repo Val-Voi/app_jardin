@@ -96,7 +96,8 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
                                                         profe['id'].toString()),
                                                 builder: (context, snapshot) {
                                                   print(snapshot);
-                                                  if (snapshot.data == '') {
+                                                  if (snapshot.data == '' ||
+                                                      snapshot.data == null) {
                                                     return Text(
                                                       'Sin nivel asignado',
                                                       style: TextStyle(

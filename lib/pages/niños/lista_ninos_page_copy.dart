@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app_jardin/pages/forms_editar/editar_ni%C3%B1o.dart';
 import 'package:app_jardin/providers/jardin_provider.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +92,20 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                           width: 100,
                                           height: 100,
                                           alignment: Alignment.center,
-                                          child: Text('probando'),
+                                          child: FutureBuilder(
+                                            future: JardinProvider()
+                                                .getDataImagen('asd'),
+                                            builder: (context, snapimagen) {
+                                              print(snapimagen.data);
+                                              // return Image(
+                                              //   image: Image.memory(
+                                              //           base64Decode(
+                                              //               snapimagen.data.toString()))
+                                              //       .image,
+                                              // ); //TODO: MOSTRAR IMAGEN
+                                              return Text('probando');
+                                            },
+                                          ),
                                         ),
                                         Expanded(
                                             child: Column(
