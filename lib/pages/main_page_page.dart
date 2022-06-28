@@ -401,7 +401,7 @@ class _MainPageState extends State<MainPage> {
                       child: Column(
                         children: <Widget>[
                           Icon(
-                            Icons.arrow_upward,
+                            MdiIcons.arrowCollapse,
                             color: Colors.black,
                           ),
                           Padding(

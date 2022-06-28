@@ -24,13 +24,13 @@ class JardinProvider {
   //agregar un niño
 
   Future<LinkedHashMap<String, dynamic>> ninoAgregar(
-      String nombre,
-      String apellido,
-      //DateTime fecha_nacimiento,
-      String rut,
-      String contacto_apoderado,
-      //int niveles_id
-      ) async {
+    String nombre,
+    String apellido,
+    //DateTime fecha_nacimiento,
+    String rut,
+    String contacto_apoderado,
+    //int niveles_id
+  ) async {
     var uri = Uri.parse('$apiURL/niveles');
     var respuesta = await http.post(uri,
         headers: <String, String>{
@@ -279,6 +279,28 @@ class JardinProvider {
       return respuesta.body;
     } else {
       return '';
+    }
+  }
+
+  Future<List<dynamic>> getNivelEducadoras(String id_nivel) async {
+    var uri = Uri.parse('$apiURL/niveles/$id_nivel/educadoras');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<dynamic>> getNivelNinos(String id_nivel) async {
+    var uri = Uri.parse('$apiURL/niveles/$id_nivel/ninos');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
     }
   }
 
