@@ -120,7 +120,7 @@ class _MainPageState extends State<MainPage> {
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
                           Text(
-                            'Agregar Niño',
+                            'Nuevo Niño',
                             style: TextStyle(color: Colors.black),
                           ),
                         ],
@@ -219,7 +219,7 @@ class _MainPageState extends State<MainPage> {
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
                           Text(
-                            'Agregar Educadora',
+                            'Nueva Educadora',
                             style: TextStyle(color: Colors.black),
                           ),
                         ],
@@ -317,7 +317,7 @@ class _MainPageState extends State<MainPage> {
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
                           Text(
-                            'Agregar Evento',
+                            'Nuevo Evento',
                             style: TextStyle(color: Colors.black),
                           ),
                         ],

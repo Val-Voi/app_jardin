@@ -374,4 +374,25 @@ class JardinProvider {
     //agregarEducadoraNivel(niveles_id);
     return json.decode(respuesta.body);
   }
+
+  //--------------------------PROVIDER IMAGEN------------------------
+
+  postDataImagen(_data, _url) async {
+    return await http.post(Uri.http('10.0.2.2:8000', _url),
+        body: jsonEncode(_data),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        });
+  }
+
+  Future<String> getDataImagen(ruta) async {
+    ruta = '/api/imagen/1656387706.png';
+    var respuesta = await http.get(Uri.http('10.0.2.2:8000', ruta));
+    if (respuesta.statusCode == 200) {
+      return respuesta.body;
+    } else {
+      return '';
+    }
+  }
 }
