@@ -3,12 +3,22 @@ import 'package:app_jardin/pages/forms_editar/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../providers/jardin_provider.dart';
+
 class EditarEducadoraPage extends StatefulWidget {
+  int id;
+  EditarEducadoraPage(this.id, {Key? key}) : super(key: key);
   @override
   State<EditarEducadoraPage> createState() => _EditarEducadoraPageState();
 }
 
 class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
+  TextEditingController idCtrl = TextEditingController();
+  TextEditingController nombreCtrl = TextEditingController();
+  TextEditingController rutCtrl = TextEditingController();
+  TextEditingController telefonoCtrl = TextEditingController();
+  TextEditingController emailCtrl = TextEditingController();
+  TextEditingController nivelCtrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   // Initial Selected Value
@@ -23,6 +33,21 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
     'Nivel 5',
   ];
   @override
+  void initState() {
+    super.initState();
+
+    JardinProvider().getEducadora(widget.id).then((data) {
+      idCtrl.text = data['id'].toString();
+      nombreCtrl.text = data['nombre'];
+      rutCtrl.text = data['rut'];
+      telefonoCtrl.text = data['telefono_contacto'];
+      emailCtrl.text = data['correo_contacto'];
+
+      // telefono_contacto,
+      // String correo_contacto
+    });
+  }
+
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
@@ -43,6 +68,7 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
 
               //NOMBRE
               TextFormField(
+                controller: nombreCtrl,
                 decoration: InputDecoration(
                   labelText: "Nombre",
                   helperText: "",
@@ -54,6 +80,7 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
 
               //RUT
               TextFormField(
+                controller: rutCtrl,
                 keyboardType: TextInputType.numberWithOptions(),
                 decoration: InputDecoration(
                   labelText: "Rut",
@@ -66,6 +93,7 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
 
               //TELEFONO
               TextFormField(
+                controller: telefonoCtrl,
                 keyboardType: TextInputType.numberWithOptions(
                     decimal: false, signed: true),
                 maxLength: 8,
@@ -81,6 +109,7 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
 
               //Correo
               TextFormField(
+                controller: emailCtrl,
                 keyboardType: TextInputType.emailAddress,
                 validator: (s) {
                   if (!s!.isValidEmail()) {
@@ -133,8 +162,14 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            final valido = _formKey.currentState!.validate();
-            print('Todo bien: $valido');
+            JardinProvider().educadoraEditar(
+              widget.id,
+              idCtrl.text.trim(),
+              nombreCtrl.text.trim(),
+              rutCtrl.text.trim(),
+              emailCtrl.text.trim(),
+              int.tryParse(telefonoCtrl.text.trim()) ?? 0,
+            );
           },
           child: Icon(MdiIcons.contentSave),
         ),
