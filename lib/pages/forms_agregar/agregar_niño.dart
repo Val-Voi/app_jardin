@@ -122,26 +122,18 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
                   Spacer(),
                   TextButton(
                     child: Icon(MdiIcons.calendar),
-                    onPressed: () async {
-                      var respuesta = await JardinProvider().ninoAgregar(
-                        nombreCtrl.text.trim(),
-                        apellidoCtrl.text.trim(),
-                        // fechaNacCtrl.text.trim(),
-                        rutCtrl.text.trim(),
-                        contactoCtrl.text.trim(),
-                        //nivelCtrl..trim(),
-                      );
-
-                      if (respuesta['messages'] != null) {
-                        print('error');
-                        if (respuesta['errors']['nombre'] != null) {
-                          errNombre = respuesta['errors']['nombre'][0];
-                        }
-
-                        setState(() {});
-                        return;
-                      }
-                      print('no error');
+                    onPressed: () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1920),
+                        lastDate: DateTime.now(),
+                      ).then((fecha) {
+                        setState(() {
+                          // fechaSeleccionada = fecha != null ? fecha : fechaSeleccionada;
+                          fechaSeleccionada = fecha ?? fechaSeleccionada;
+                        });
+                      });
                     },
                   ),
                 ],
@@ -155,9 +147,33 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            final valido = _formKey.currentState!.validate();
-            print('Todo bien: $valido');
+          onPressed: () async {
+            var respuesta = await JardinProvider().ninoAgregar(
+                nombreCtrl.text.trim(),
+                apellidoCtrl.text.trim(),
+                rutCtrl.text.trim(),
+                nivelCtrl.text.trim(),
+                fechaNacCtrl.text.trim());
+
+//                 nombreCtrl
+// apellidoCtrl
+// contactoCtrl
+// rutCtrl
+// nivelCtrl
+// fechaNacCtrl
+
+            if (respuesta['messages'] != null) {
+              print('error');
+              if (respuesta['errors']['nombre'] != null) {
+                errNombre = respuesta['errors']['nombre'][0];
+              }
+
+              setState(() {});
+              return;
+            }
+            print('no error');
+            // final valido = _formKey.currentState!.validate();
+            // print('Todo bien: $valido');
           },
           child: Icon(MdiIcons.contentSave),
         ),
