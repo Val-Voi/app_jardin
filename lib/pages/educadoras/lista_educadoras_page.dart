@@ -4,7 +4,8 @@ import '../../providers/jardin_provider.dart';
 import '../forms_editar/editar_educadora.dart';
 
 class ListaEducadorasPage extends StatefulWidget {
-  ListaEducadorasPage({Key? key}) : super(key: key);
+  final String educadoraBuscar;
+  ListaEducadorasPage({Key? key, this.educadoraBuscar: ''}) : super(key: key);
 
   @override
   State<ListaEducadorasPage> createState() => _ListaEducadorasPageState();
@@ -19,7 +20,13 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
     Color.fromARGB(255, 185, 123, 243),
     Color.fromARGB(255, 130, 192, 241),
   ];
-  String buscarEducadora = "";
+  String buscarEducadora = '';
+  TextEditingController _controller = TextEditingController(text: '');
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => buscarDefault());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +42,10 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
             child: Column(
               children: [
                 TextField(
+                  controller: _controller,
                   onChanged: (value) {
                     setState(() {
-                      buscarEducadora = value.toLowerCase();
+                      _controller.text = value.toLowerCase();
                     });
                   },
                   decoration: InputDecoration(
@@ -58,7 +66,7 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
                         separatorBuilder: (BuildContext context, int index) {
                           return snap.data![index]['nombre']
                                   .toLowerCase()
-                                  .contains(buscarEducadora)
+                                  .contains(_controller.text.toLowerCase())
                               ? Divider()
                               : Container();
                         },
@@ -67,7 +75,7 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
                           var profe = snap.data[index];
                           return snap.data![index]['nombre']
                                   .toLowerCase()
-                                  .contains(buscarEducadora)
+                                  .contains(_controller.text.toLowerCase())
                               ? Center(
                                   child: Card(
                                   color: color(),
@@ -227,5 +235,12 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
       _contadorColor = 0;
     }
     return colores[_contadorColor];
+  }
+
+  void buscarDefault() {
+    setState(() {
+      print(widget.educadoraBuscar);
+      _controller.text = widget.educadoraBuscar.trim();
+    });
   }
 }
