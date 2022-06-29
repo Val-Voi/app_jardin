@@ -1,4 +1,5 @@
 import 'package:app_jardin/pages/main_page_page.dart';
+import 'package:app_jardin/pages/niveles/lista_nivel_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_jardin/pages/forms_editar/editar_nivel.dart';
 import '../../providers/jardin_provider.dart';
@@ -135,13 +136,13 @@ class _MenuNivelesPageState extends State<MenuNivelesPage> {
                                           ],
                                           onSelected: (opcion) {
                                             if (opcion == 'editar') {
-                                                    MaterialPageRoute route =
-                                                        MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          EditarNivelPage(nivel['id']),
-                                                    );
-                                                    Navigator.push(
-                                                        context, route);
+                                              MaterialPageRoute route =
+                                                  MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditarNivelPage(
+                                                        nivel['id']),
+                                              );
+                                              Navigator.push(context, route);
                                             } else if (opcion ==
                                                 'integrantes') {
                                               int nivel_id = nivel['id'];
@@ -149,10 +150,11 @@ class _MenuNivelesPageState extends State<MenuNivelesPage> {
                                                   nivel['nombre'];
                                               MaterialPageRoute route =
                                                   MaterialPageRoute(
-                                                builder: (context) => MainPage(
-                                                    // id_nivel: nivel_id,
-                                                    // nivel_nombre: nivel_nombre,
-                                                    ),
+                                                builder: (context) =>
+                                                    ListaNivelPage(
+                                                  nivel_id: nivel_id,
+                                                  nivel_nombre: nivel_nombre,
+                                                ),
                                               );
                                               Navigator.push(context, route);
                                             } else if (opcion == 'borrar') {

@@ -152,8 +152,8 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
                 nombreCtrl.text.trim(),
                 apellidoCtrl.text.trim(),
                 rutCtrl.text.trim(),
-                nivelCtrl.text.trim(),
-                fechaNacCtrl.text.trim());
+                nivelCtrl.text.trim());
+            //fechaNacCtrl.text.trim());
 
 //                 nombreCtrl
 // apellidoCtrl

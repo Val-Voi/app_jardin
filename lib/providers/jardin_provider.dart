@@ -203,7 +203,7 @@ class JardinProvider {
 
   //datos de 1 nivel
   Future<LinkedHashMap<String, dynamic>> getNivel(int id) async {
-    var uri = Uri.parse('$apiURL/nivel/$id');
+    var uri = Uri.parse('$apiURL/niveles/$id');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {

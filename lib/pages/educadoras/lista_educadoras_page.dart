@@ -139,7 +139,8 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
                                                   MaterialPageRoute route =
                                                       MaterialPageRoute(
                                                     builder: (context) =>
-                                                        EditarEducadoraPage(),
+                                                        EditarEducadoraPage(
+                                                            profe['id']),
                                                   );
                                                   Navigator.push(
                                                       context, route);
