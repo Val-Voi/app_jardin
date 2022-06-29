@@ -138,7 +138,7 @@ class _MenuNivelesPageState extends State<MenuNivelesPage> {
                                                     MaterialPageRoute route =
                                                         MaterialPageRoute(
                                                       builder: (context) =>
-                                                          EditarNivelPage(),
+                                                          EditarNivelPage(nivel['id']),
                                                     );
                                                     Navigator.push(
                                                         context, route);
