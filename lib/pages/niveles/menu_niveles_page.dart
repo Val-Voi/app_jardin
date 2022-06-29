@@ -1,10 +1,7 @@
 import 'package:app_jardin/pages/main_page_page.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import 'package:app_jardin/pages/forms_editar/editar_nivel.dart';
 import '../../providers/jardin_provider.dart';
-import '../forms_editar/editar_niño.dart';
-import '../niños/eventos_niño_page.dart';
 
 class MenuNivelesPage extends StatefulWidget {
   MenuNivelesPage({Key? key}) : super(key: key);
@@ -27,7 +24,7 @@ class _MenuNivelesPageState extends State<MenuNivelesPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Lista de Niveles'),
-          backgroundColor: Color.fromARGB(255, 136, 236, 74),
+          backgroundColor: Color.fromARGB(255, 212, 146, 247),
           leading: BackButton(),
         ),
         body: Padding(
@@ -138,12 +135,13 @@ class _MenuNivelesPageState extends State<MenuNivelesPage> {
                                           ],
                                           onSelected: (opcion) {
                                             if (opcion == 'editar') {
-                                              MaterialPageRoute route =
-                                                  MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainPage(),
-                                              );
-                                              Navigator.push(context, route);
+                                                    MaterialPageRoute route =
+                                                        MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EditarNivelPage(),
+                                                    );
+                                                    Navigator.push(
+                                                        context, route);
                                             } else if (opcion ==
                                                 'integrantes') {
                                               int nivel_id = nivel['id'];
