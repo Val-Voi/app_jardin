@@ -7,6 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../providers/jardin_provider.dart';
 import '../forms_editar/editar_niño.dart';
 import '../niños/eventos_niño_page.dart';
+import '../niños/lista_ninos_page_copy.dart';
 
 class ListaNivelPage extends StatefulWidget {
   final int nivel_id;
@@ -164,6 +165,10 @@ class _ListaNivelPageState extends State<ListaNivelPage> {
                                         trailing: PopupMenuButton(
                                           itemBuilder: (context) => [
                                             PopupMenuItem(
+                                              value: 'datos',
+                                              child: Text('Ver Datos'),
+                                            ),
+                                            PopupMenuItem(
                                               value: 'nivel',
                                               child: Text('Cambiar de Nivel'),
                                             ),
@@ -174,6 +179,15 @@ class _ListaNivelPageState extends State<ListaNivelPage> {
                                                   MaterialPageRoute(
                                                 builder: (context) =>
                                                     AgregarANivelPage(),
+                                              );
+                                              Navigator.push(context, route);
+                                            } else if (opcion == 'datos') {
+                                              MaterialPageRoute route =
+                                                  MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ListaNinosPage(
+                                                        ninoBuscar:
+                                                            nino['apellido']),
                                               );
                                               Navigator.push(context, route);
                                             }

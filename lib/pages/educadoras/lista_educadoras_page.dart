@@ -20,7 +20,6 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
     Color.fromARGB(255, 185, 123, 243),
     Color.fromARGB(255, 130, 192, 241),
   ];
-  String buscarEducadora = '';
   TextEditingController _controller = TextEditingController(text: '');
   @override
   void initState() {
@@ -42,7 +41,7 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
             child: Column(
               children: [
                 TextField(
-                  controller: _controller,
+                  //controller: _controller,
                   onChanged: (value) {
                     setState(() {
                       _controller.text = value.toLowerCase();

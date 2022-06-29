@@ -1,12 +1,13 @@
 import 'dart:convert';
-
+import 'dart:io' as Io;
 import 'package:app_jardin/pages/forms_editar/editar_ni%C3%B1o.dart';
 import 'package:app_jardin/providers/jardin_provider.dart';
 import 'package:flutter/material.dart';
 import 'eventos_niño_page.dart';
 
 class ListaNinosPage extends StatefulWidget {
-  ListaNinosPage({Key? key}) : super(key: key);
+  final String ninoBuscar;
+  ListaNinosPage({Key? key, this.ninoBuscar: ''}) : super(key: key);
 
   @override
   State<ListaNinosPage> createState() => _ListaNinosPageState();
@@ -22,12 +23,12 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
     Color.fromARGB(255, 130, 192, 241),
   ];
   String buscarNino = "";
-
-//  @override
-//   void initState() {
-//     super.initState();
-//   initializeDateFormatting('de_DE', null).then((_) => runMyCode());
-//   }
+  TextEditingController _controller = TextEditingController(text: '');
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => buscarDefault());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +43,34 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
             child: Container(
               child: Column(
                 children: [
+                  FutureBuilder(
+                    future: JardinProvider().getDataImagen('asd'),
+                    builder: (context, snapimagen) {
+                      //print(snapimagen);
+                      // return Image(
+                      //   image: Image.memory(
+                      //           base64Decode(snapimagen.data.toString()))
+                      //       .image,
+                      // ); //TODO: MOSTRAR IMAGEN
+                      // final decodedBytes =
+                      //     base64Decode(snapimagen.data.toString());
+                      // var file = Io.File("decodedBezkoder.png");
+                      // file.writeAsBytesSync(decodedBytes);
+                      return Container(
+                        child: Image(
+                          image: Image.memory(base64Decode(
+                                  base64.normalize(snapimagen.data.toString())))
+                              .image,
+                        ),
+                      );
+
+                      //return Text(snapimagen.data.toString());
+                    },
+                  ),
                   TextField(
                     onChanged: (value) {
                       setState(() {
-                        buscarNino = value.toLowerCase();
+                        _controller.text = value.toLowerCase();
                       });
                     },
                     decoration: InputDecoration(
@@ -67,10 +92,12 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                           separatorBuilder: (BuildContext context, int index) {
                             return snap.data![index]['nombre']
                                         .toLowerCase()
-                                        .contains(buscarNino) ||
+                                        .contains(
+                                            _controller.text.toLowerCase()) ||
                                     snap.data![index]['apellido']
                                         .toLowerCase()
-                                        .contains(buscarNino)
+                                        .contains(
+                                            _controller.text.toLowerCase())
                                 ? Divider()
                                 : Container();
                           },
@@ -79,10 +106,12 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                             var nino = snap.data[index];
                             return snap.data![index]['nombre']
                                         .toLowerCase()
-                                        .contains(buscarNino) ||
+                                        .contains(
+                                            _controller.text.toLowerCase()) ||
                                     snap.data![index]['apellido']
                                         .toLowerCase()
-                                        .contains(buscarNino)
+                                        .contains(
+                                            _controller.text.toLowerCase())
                                 ? Center(
                                     child: Card(
                                     color: color(),
@@ -92,20 +121,19 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                           width: 100,
                                           height: 100,
                                           alignment: Alignment.center,
-                                          child: FutureBuilder(
-                                            future: JardinProvider()
-                                                .getDataImagen('asd'),
-                                            builder: (context, snapimagen) {
-                                              print(snapimagen.data);
-                                              // return Image(
-                                              //   image: Image.memory(
-                                              //           base64Decode(
-                                              //               snapimagen.data.toString()))
-                                              //       .image,
-                                              // ); //TODO: MOSTRAR IMAGEN
-                                              return Text('probando');
-                                            },
-                                          ),
+                                          // child: FutureBuilder(
+                                          //   future: JardinProvider()
+                                          //       .getDataImagen('asd'),
+                                          //   builder: (context, snapimagen) {
+                                          //     // return Image(
+                                          //     //   image: Image.memory(
+                                          //     //           base64Decode(
+                                          //     //               snapimagen.data.toString()))
+                                          //     //       .image,
+                                          //     // ); //TODO: MOSTRAR IMAGEN
+                                          //     return Text('probando');
+                                          //   },
+                                          // ),
                                         ),
                                         Expanded(
                                             child: Column(
@@ -277,5 +305,12 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
       _contadorColor = 0;
     }
     return colores[_contadorColor];
+  }
+
+  void buscarDefault() {
+    setState(() {
+      print(widget.ninoBuscar);
+      _controller.text = widget.ninoBuscar.trim();
+    });
   }
 }

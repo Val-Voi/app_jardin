@@ -390,7 +390,7 @@ class JardinProvider {
     ruta = '/api/imagen/1656387706.png';
     var respuesta = await http.get(Uri.http('10.0.2.2:8000', ruta));
     if (respuesta.statusCode == 200) {
-      return respuesta.body;
+      return respuesta.body.trim();
     } else {
       return '';
     }
