@@ -58,7 +58,7 @@ class JardinProvider {
 
   //datos de 1 niño
   Future<LinkedHashMap<String, dynamic>> getNino(int id) async {
-    var uri = Uri.parse('$apiURL/niños/$id');
+    var uri = Uri.parse('$apiURL/ninos/$id');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {
@@ -72,23 +72,24 @@ class JardinProvider {
   Future<LinkedHashMap<String, dynamic>> ninoEditar(
       int id,
       String nombre,
-      //DateTime fecha_nacimiento,
+      String apellido,
       String rut,
       String contacto_apoderado,
+      String fecha_nacimiento,
       int nivel_id) async {
-    var uri = Uri.parse('$apiURL/niños/$id');
+    var uri = Uri.parse('$apiURL/ninos/$id');
     var respuesta = await http.put(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
-          'id': id,
           'nombre': nombre,
-          //'fecha_nacimiento': fecha_nacimiento,
+          'apellido': apellido,
           'rut': rut,
           'contacto_apoderado': contacto_apoderado,
-          //'nivel_id': nivel_id,
+          'fecha_nacimiento': fecha_nacimiento,
+          'nivel_id': nivel_id,
         }));
 
     return json.decode(respuesta.body);

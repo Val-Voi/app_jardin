@@ -6,8 +6,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../providers/jardin_provider.dart';
 
 class EditarEducadoraPage extends StatefulWidget {
-  int id;
-  EditarEducadoraPage(this.id, {Key? key}) : super(key: key);
+  final int id;
+  EditarEducadoraPage({Key? key, required this.id}) : super(key: key);
   @override
   State<EditarEducadoraPage> createState() => _EditarEducadoraPageState();
 }

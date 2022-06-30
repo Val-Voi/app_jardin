@@ -188,7 +188,11 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                                     MaterialPageRoute route =
                                                         MaterialPageRoute(
                                                       builder: (context) =>
-                                                          EditarNinoPage(),
+                                                          EditarNinoPage(
+                                                              id: nino['id'],
+                                                              nivel_actual: nino[
+                                                                      'nivel_id']
+                                                                  .toString()),
                                                     );
                                                     Navigator.push(
                                                         context, route);
