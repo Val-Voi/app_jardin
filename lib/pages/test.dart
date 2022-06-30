@@ -17,7 +17,7 @@ class _paginaState extends State<pagina> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Column(
+        child: Row(
           children: [
             (_ruta == null)
                 ? Container()
@@ -51,7 +51,10 @@ class _paginaState extends State<pagina> {
   }
 
   void _enviarform() async {
-    var data = {'imagen': _image64};
+    var data = {
+      'imagen': _image64,
+      'nombre': DateTime.now().millisecondsSinceEpoch
+    };
     var respuesta = await JardinProvider().postDataImagen(data, "/api/imagen");
     var contenido = json.decode(respuesta.body);
     return contenido;

@@ -120,7 +120,6 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                                                 .toString()
                                                                 .split('\n')
                                                                 .join()));
-                                                print(imgdecoded.length);
                                                 ImageProvider imagen =
                                                     Image.memory(imgdecoded)
                                                         .image;

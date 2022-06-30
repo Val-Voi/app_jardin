@@ -142,10 +142,7 @@ class _NinoNivelFormState extends State<NinoNivelForm> {
                       ),
                       items: niveles
                           .map((item) => DropdownMenuItem<String>(
-                                //value: item['nombre'] + ' ' + item['apellido'],
                                 value: item['id'].toString(),
-
-                                // id: item['id'];
                                 child: Text(
                                   item['nombre'],
                                   style: const TextStyle(

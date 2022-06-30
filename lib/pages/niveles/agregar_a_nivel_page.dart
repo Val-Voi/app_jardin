@@ -16,7 +16,7 @@ class _AgregarANivelPageState extends State<AgregarANivelPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Agregar a Nivel'),
-        backgroundColor: Color.fromARGB(255, 136, 236, 74),
+        backgroundColor: Color.fromARGB(255, 130, 192, 241),
         leading: BackButton(),
       ),
       body: Container(

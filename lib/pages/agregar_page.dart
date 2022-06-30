@@ -24,7 +24,7 @@ class _AgregarPageState extends State<AgregarPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Agregar datos'),
-        backgroundColor: Color.fromARGB(255, 136, 236, 74),
+        backgroundColor: Color.fromARGB(255, 130, 192, 241),
         leading: BackButton(),
       ),
       body: Container(

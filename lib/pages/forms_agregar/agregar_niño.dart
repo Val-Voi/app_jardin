@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:app_jardin/pages/forms_editar/my_input_theme.dart';
 import 'package:app_jardin/pages/forms_editar/string_extensions.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -24,7 +29,9 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
   String errContacto = '';
   String errApellido = '';
   String errNivel = '';
-
+  String selectedNivel = '1';
+  String? _ruta;
+  String? _image64;
   TextEditingController nombreCtrl = TextEditingController();
   TextEditingController apellidoCtrl = TextEditingController();
   TextEditingController contactoCtrl = TextEditingController();
@@ -57,8 +64,6 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
           child: ListView(
             padding: const EdgeInsets.all(32.0),
             children: <Widget>[
-              // CampoNombre(),
-
               //NOMBRE
               TextFormField(
                 controller: nombreCtrl,
@@ -73,7 +78,7 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
 
               //APELLIDO
               TextFormField(
-                controller: rutCtrl,
+                controller: apellidoCtrl,
                 decoration: InputDecoration(
                   labelText: "Apellido",
                   helperText: "",
@@ -138,6 +143,73 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
                   ),
                 ],
               ),
+              FutureBuilder(
+                  future: JardinProvider().getNiveles(),
+                  builder: (context, AsyncSnapshot snap) {
+                    if (!snap.hasData) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    List niveles = snap.data;
+                    return DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        isExpanded: true,
+                        hint: Text(
+                          'Seleccionar nivel',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).hintColor,
+                          ),
+                        ),
+                        items: niveles
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item['id'].toString(),
+                                  child: Text(
+                                    item['nombre'],
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        value: selectedNivel,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedNivel = value as String;
+                            print(selectedNivel);
+                          });
+                        },
+                        buttonHeight: 40,
+                        buttonWidth: 200,
+                        itemHeight: 40,
+                        dropdownMaxHeight: 200,
+                      ),
+                    );
+                  }),
+
+              Row(
+                children: [
+                  (_ruta == null)
+                      ? Container()
+                      : Image.file(
+                          File(_ruta!),
+                          width: 200,
+                        ),
+                  ElevatedButton(
+                      child: Text("CARGAR IMAGEN"),
+                      onPressed: () async {
+                        final XFile? _archivo = await ImagePicker()
+                            .pickImage(source: ImageSource.gallery);
+
+                        setState(() {
+                          _ruta = _archivo!.path;
+                        });
+                        _image64 = base64
+                            .encode(await new File(_ruta!).readAsBytesSync());
+                      }),
+                ],
+              ),
             ]
                 .map((child) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -148,32 +220,37 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            String nombreImagen =
+                DateTime.now().millisecondsSinceEpoch.toString() + '.png';
             var respuesta = await JardinProvider().ninoAgregar(
-                nombreCtrl.text.trim(),
-                apellidoCtrl.text.trim(),
-                rutCtrl.text.trim(),
-                nivelCtrl.text.trim());
-            //fechaNacCtrl.text.trim());
+              nombreCtrl.text.trim(),
+              apellidoCtrl.text.trim(),
+              fechaSeleccionada.toString(),
+              rutCtrl.text.trim(),
+              contactoCtrl.text.trim(),
+              int.tryParse(selectedNivel) ?? 1,
+              nombreImagen,
+            );
 
-//                 nombreCtrl
-// apellidoCtrl
-// contactoCtrl
-// rutCtrl
-// nivelCtrl
-// fechaNacCtrl
+            var data = {'imagen': _image64, 'nombre': nombreImagen};
+            var respuestaImagen =
+                await JardinProvider().postDataImagen(data, "/api/imagen");
+
+            var contenido = json.decode(respuestaImagen.body);
 
             if (respuesta['messages'] != null) {
               print('error');
               if (respuesta['errors']['nombre'] != null) {
                 errNombre = respuesta['errors']['nombre'][0];
               }
+              if (respuesta['errors']['nivel'] != null) {
+                errNivel = respuesta['errors']['nivel'][0];
+              }
 
               setState(() {});
               return;
             }
             print('no error');
-            // final valido = _formKey.currentState!.validate();
-            // print('Todo bien: $valido');
           },
           child: Icon(MdiIcons.contentSave),
         ),
