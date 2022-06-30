@@ -164,10 +164,10 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
           onPressed: () {
             JardinProvider().educadoraEditar(
               widget.id,
-              int.tryParse(idCtrl.text.trim()) ?? 0,
+              //int.tryParse(idCtrl.text.trim()) ?? 0,
               nombreCtrl.text.trim(),
               rutCtrl.text.trim(),
-              telefonoCtrl.text.trim(),
+              '9' + telefonoCtrl.text.trim(),
               emailCtrl.text.trim(),
             );
             Navigator.pop(context);

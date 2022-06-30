@@ -71,10 +71,10 @@ class JardinProvider {
   Future<LinkedHashMap<String, dynamic>> ninoEditar(
       int id,
       String nombre,
-      DateTime fecha_nacimiento,
+      //DateTime fecha_nacimiento,
       String rut,
       String contacto_apoderado,
-      int niveles_id) async {
+      int nivel_id) async {
     var uri = Uri.parse('$apiURL/niños/$id');
     var respuesta = await http.put(uri,
         headers: <String, String>{
@@ -82,11 +82,12 @@ class JardinProvider {
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
+          'id': id,
           'nombre': nombre,
-          'fecha_nacimiento': fecha_nacimiento,
+          //'fecha_nacimiento': fecha_nacimiento,
           'rut': rut,
           'contacto_apoderado': contacto_apoderado,
-          'nivel_id': niveles_id,
+          //'nivel_id': nivel_id,
         }));
 
     return json.decode(respuesta.body);
@@ -147,12 +148,13 @@ class JardinProvider {
 
   //editar una educadora
   Future<LinkedHashMap<String, dynamic>> educadoraEditar(
-      int id,
-      String nombre,
-      String rut,
-      String telefono_contacto,
-      String correo_contacto,
-      int niveles_id) async {
+    int id,
+    String nombre,
+    String rut,
+    String telefono_contacto,
+    String correo_contacto,
+    //int nivel_id
+  ) async {
     var uri = Uri.parse('$apiURL/educadoras/$id');
     var respuesta = await http.put(uri,
         headers: <String, String>{
@@ -160,12 +162,13 @@ class JardinProvider {
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
+          'id': id,
           'nombre': nombre,
           'rut': rut,
-          'contacto_apoderado': correo_contacto,
-          'fecha_nacimiento': telefono_contacto,
+          'correo_contacto': correo_contacto,
+          'telefono_contacto': telefono_contacto,
         }));
-    //agregarEducadoraNivel(niveles_id);
+    //agregarEducadoraNivel(nivel_id);
     return json.decode(respuesta.body);
   }
 
