@@ -389,11 +389,11 @@ class JardinProvider {
         });
   }
 
-  Future<String> getDataImagen(ruta) async {
-    ruta = '/api/imagen/1656387706.png';
+  Future<String> getDataImagen(imagen) async {
+    String ruta = '/api/imagen/$imagen';
     var respuesta = await http.get(Uri.http('10.0.2.2:8000', ruta));
     if (respuesta.statusCode == 200) {
-      return respuesta.body.trim();
+      return respuesta.body;
     } else {
       return '';
     }

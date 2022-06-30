@@ -167,7 +167,7 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
               //int.tryParse(idCtrl.text.trim()) ?? 0,
               nombreCtrl.text.trim(),
               rutCtrl.text.trim(),
-              '9' + telefonoCtrl.text.trim(),
+              telefonoCtrl.text.trim(),
               emailCtrl.text.trim(),
             );
             Navigator.pop(context);

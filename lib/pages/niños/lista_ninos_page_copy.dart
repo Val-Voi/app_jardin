@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io' as Io;
+import 'dart:typed_data';
 import 'package:app_jardin/pages/forms_editar/editar_ni%C3%B1o.dart';
 import 'package:app_jardin/providers/jardin_provider.dart';
 import 'package:flutter/material.dart';
@@ -43,30 +44,6 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
             child: Container(
               child: Column(
                 children: [
-                  FutureBuilder(
-                    future: JardinProvider().getDataImagen('asd'),
-                    builder: (context, snapimagen) {
-                      //print(snapimagen);
-                      // return Image(
-                      //   image: Image.memory(
-                      //           base64Decode(snapimagen.data.toString()))
-                      //       .image,
-                      // ); //TODO: MOSTRAR IMAGEN
-                      // final decodedBytes =
-                      //     base64Decode(snapimagen.data.toString());
-                      // var file = Io.File("decodedBezkoder.png");
-                      // file.writeAsBytesSync(decodedBytes);
-                      return Container(
-                        child: Image(
-                          image: Image.memory(base64Decode(
-                                  base64.normalize(snapimagen.data.toString())))
-                              .image,
-                        ),
-                      );
-
-                      //return Text(snapimagen.data.toString());
-                    },
-                  ),
                   TextField(
                     onChanged: (value) {
                       setState(() {
@@ -121,19 +98,42 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                           width: 100,
                                           height: 100,
                                           alignment: Alignment.center,
-                                          // child: FutureBuilder(
-                                          //   future: JardinProvider()
-                                          //       .getDataImagen('asd'),
-                                          //   builder: (context, snapimagen) {
-                                          //     // return Image(
-                                          //     //   image: Image.memory(
-                                          //     //           base64Decode(
-                                          //     //               snapimagen.data.toString()))
-                                          //     //       .image,
-                                          //     // ); //TODO: MOSTRAR IMAGEN
-                                          //     return Text('probando');
-                                          //   },
-                                          // ),
+                                          child: FutureBuilder(
+                                            future: JardinProvider()
+                                                .getDataImagen(nino['imagen']),
+                                            builder: (context,
+                                                AsyncSnapshot<String>
+                                                    snapimagen) {
+                                              if (!snapimagen.hasData) {
+                                                return Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              } else if (snapimagen
+                                                          .data!.length %
+                                                      4 ==
+                                                  0) {
+                                                Uint8List imgdecoded =
+                                                    base64Decode(
+                                                        base64.normalize(
+                                                            snapimagen.data
+                                                                .toString()
+                                                                .split('\n')
+                                                                .join()));
+                                                print(imgdecoded.length);
+                                                ImageProvider imagen =
+                                                    Image.memory(imgdecoded)
+                                                        .image;
+                                                return CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundImage: imagen,
+                                                );
+                                              } else {
+                                                //print(snapimagen.data!.length);
+                                                return Text('no imagen');
+                                              }
+                                            },
+                                          ),
                                         ),
                                         Expanded(
                                             child: Column(
@@ -161,7 +161,6 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                                         ),
                                                       );
                                                     }
-
                                                     return Text(
                                                       'Nivel ${snapshot.data}',
                                                       style: TextStyle(

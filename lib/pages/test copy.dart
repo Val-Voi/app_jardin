@@ -16,42 +16,59 @@ class _pagina2State extends State<pagina2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: JardinProvider().getDataImagen('asd'),
-        builder: (context, AsyncSnapshot<String> snapimagen) {
-          if (!snapimagen.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            Uint8List imgdecoded =
-                base64Decode(snapimagen.data.toString().split('\n').join());
-            //print(snapimagen);
-            // return Image(
-            //   image: Image.memory(
-            //           base64Decode(snapimagen.data.toString()))
-            //       .image,
-            // ); //TODO: MOSTRAR IMAGEN
-            // final decodedBytes =
-            //     base64Decode(snapimagen.data.toString());
-            // var file = Io.File("decodedBezkoder.png");
-            // file.writeAsBytesSync(decodedBytes);
-            // return Center(
-            //     // child: Text('gdsaddn'),
-            //     child: Image(
-            //   image: Image.memory(base64Decode(snapimagen.data.toString())).image,
-            // ));Uint8Lists
+      body: Row(
+        children: [
+          Container(
+            // decoration:
+            //     BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            width: 100,
+            height: 100,
+            alignment: Alignment.center,
+            child: FutureBuilder(
+              future: JardinProvider().getDataImagen('asd'),
+              builder: (context, AsyncSnapshot<String> snapimagen) {
+                if (!snapimagen.hasData) {
+                  //print(snapimagen.data!.length);
 
-            // // );
-            ImageProvider imagen = Image.memory(imgdecoded).image;
-            return Image(
-              image: imagen,
-            );
-          }
-          // return Text(base64Decode(snapimagen.data.toString()).toString());
-          //return Text(snapimagen.data.toString());
-          //return Text(imgdecoded.toString());
-        },
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapimagen.data!.length % 4 == 0) {
+                  Uint8List imgdecoded = base64Decode(
+                      snapimagen.data.toString().split('\n').join());
+                  //print(snapimagen);
+                  // return Image(
+                  //   image: Image.memory(
+                  //           base64Decode(snapimagen.data.toString()))
+                  //       .image,
+                  // ); //TODO: MOSTRAR IMAGEN
+                  // final decodedBytes =
+                  //     base64Decode(snapimagen.data.toString());
+                  // var file = Io.File("decodedBezkoder.png");
+                  // file.writeAsBytesSync(decodedBytes);
+                  // return Center(
+                  //     // child: Text('gdsaddn'),
+                  //     child: Image(
+                  //   image: Image.memory(base64Decode(snapimagen.data.toString())).image,
+                  // ));Uint8Lists
+
+                  // // );
+                  ImageProvider imagen = Image.memory(imgdecoded).image;
+                  return CircleAvatar(
+                    radius: 50,
+                    backgroundImage: imagen,
+                  );
+                } else {
+                  return Text('no imagen');
+                }
+                // return Text(base64Decode(snapimagen.data.toString()).toString());
+                //return Text(snapimagen.data.toString());
+                //return Text(imgdecoded.toString());s
+              },
+            ),
+          ),
+          Expanded(child: Text('¡asdsadsadas'))
+        ],
       ),
     );
   }
