@@ -26,12 +26,12 @@ class JardinProvider {
   Future<LinkedHashMap<String, dynamic>> ninoAgregar(
     String nombre,
     String apellido,
+    //DateTime fecha_nacimiento,
     String rut,
     String contacto_apoderado,
-    String fecha_nac,
-    //int niveles_id//
+    //int nivel_id
   ) async {
-    var uri = Uri.parse('$apiURL/ninos');
+    var uri = Uri.parse('$apiURL/niveles');
     var respuesta = await http.post(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -40,10 +40,10 @@ class JardinProvider {
         body: jsonEncode(<String, dynamic>{
           'nombre': nombre,
           'apellido': apellido,
-          //'fecha_nacimiento': fecha_nacimiento,//
+          //'fecha_nacimiento': fecha_nacimiento,
           'rut': rut,
           'contacto_apoderado': contacto_apoderado,
-          //'niveles_id': niveles_id,//
+          //'nivel_id': nivel_id,
         }));
     return json.decode(respuesta.body);
   }
@@ -86,7 +86,7 @@ class JardinProvider {
           'fecha_nacimiento': fecha_nacimiento,
           'rut': rut,
           'contacto_apoderado': contacto_apoderado,
-          'niveles_id': niveles_id,
+          'nivel_id': niveles_id,
         }));
 
     return json.decode(respuesta.body);
@@ -108,13 +108,9 @@ class JardinProvider {
 
   //agregar educadora
 
-  Future<LinkedHashMap<String, dynamic>> educadoraAgregar(
-    String nombre,
-    String rut,
-    String telefono_contacto,
-    String correo_contacto,
-  ) async {
-    var uri = Uri.parse('$apiURL/niveles');
+  Future<LinkedHashMap<String, dynamic>> educadoraAgregar(String nombre,
+      String rut, String telefono_contacto, String correo_contacto) async {
+    var uri = Uri.parse('$apiURL/educadoras');
     var respuesta = await http.post(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -123,8 +119,8 @@ class JardinProvider {
         body: jsonEncode(<String, dynamic>{
           'nombre': nombre,
           'rut': rut,
-          'contacto_apoderado': correo_contacto,
-          'fecha_nacimiento': telefono_contacto,
+          'telefono_contacto': telefono_contacto,
+          'correo_contacto': correo_contacto,
         }));
     //agregarEducadoraNivel(niveles_id);
     return json.decode(respuesta.body);
@@ -151,13 +147,12 @@ class JardinProvider {
 
   //editar una educadora
   Future<LinkedHashMap<String, dynamic>> educadoraEditar(
-    int id,
-    int id_nueva,
-    String nombre,
-    String rut,
-    String telefono_contacto,
-    String correo_contacto,
-  ) async {
+      int id,
+      String nombre,
+      String rut,
+      String telefono_contacto,
+      String correo_contacto,
+      int niveles_id) async {
     var uri = Uri.parse('$apiURL/educadoras/$id');
     var respuesta = await http.put(uri,
         headers: <String, String>{
@@ -165,8 +160,6 @@ class JardinProvider {
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
-          'id': id,
-          'id_nueva': id_nueva,
           'nombre': nombre,
           'rut': rut,
           'contacto_apoderado': correo_contacto,
@@ -210,7 +203,7 @@ class JardinProvider {
 
   //datos de 1 nivel
   Future<LinkedHashMap<String, dynamic>> getNivel(int id) async {
-    var uri = Uri.parse('$apiURL/nivel/$id');
+    var uri = Uri.parse('$apiURL/niveles/$id');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {
@@ -234,6 +227,81 @@ class JardinProvider {
         }));
     //agregarEducadoraNivel(niveles_id);
     return json.decode(respuesta.body);
+  }
+
+  Future<String> getNinoNivel(String id_nino) async {
+    var uri = Uri.parse('$apiURL/ninos/$id_nino/nivel');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return respuesta.body;
+    } else {
+      return '';
+    }
+  }
+
+  Future<LinkedHashMap<String, dynamic>> ninoNivel(
+      int id_nino, int id_nivel) async {
+    var uri = Uri.parse('$apiURL/ninos/$id_nino/nivel');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'niveles_id': id_nivel,
+        }));
+    //agregarEducadoraNivel(niveles_id);
+    return json.decode(respuesta.body);
+  }
+
+  Future<LinkedHashMap<String, dynamic>> educadoraNivel(
+      int id_educadora, int id_nivel) async {
+    var uri = Uri.parse('$apiURL/educadoranivel');
+    var respuesta = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'niveles_id': id_nivel,
+          'educadoras_id': id_educadora
+        }));
+    //agregarEducadoraNivel(niveles_id);
+    return json.decode(respuesta.body);
+  }
+
+  Future<String> getEducadoraNivel(String id_educadora) async {
+    var uri = Uri.parse('$apiURL/educadoras/$id_educadora/nivel');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return respuesta.body;
+    } else {
+      return '';
+    }
+  }
+
+  Future<List<dynamic>> getNivelEducadoras(String id_nivel) async {
+    var uri = Uri.parse('$apiURL/niveles/$id_nivel/educadoras');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<dynamic>> getNivelNinos(String id_nivel) async {
+    var uri = Uri.parse('$apiURL/niveles/$id_nivel/ninos');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
   }
 
   //--------------------------PROVIDER EVENTOS------------------------
@@ -305,5 +373,26 @@ class JardinProvider {
         }));
     //agregarEducadoraNivel(niveles_id);
     return json.decode(respuesta.body);
+  }
+
+  //--------------------------PROVIDER IMAGEN------------------------
+
+  postDataImagen(_data, _url) async {
+    return await http.post(Uri.http('10.0.2.2:8000', _url),
+        body: jsonEncode(_data),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        });
+  }
+
+  Future<String> getDataImagen(ruta) async {
+    ruta = '/api/imagen/1656387706.png';
+    var respuesta = await http.get(Uri.http('10.0.2.2:8000', ruta));
+    if (respuesta.statusCode == 200) {
+      return respuesta.body.trim();
+    } else {
+      return '';
+    }
   }
 }
