@@ -32,6 +32,7 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
   String selectedNivel = '1';
   String? _ruta;
   String? _image64;
+  String cargaImagen = 'Cargar imagen';
   TextEditingController nombreCtrl = TextEditingController();
   TextEditingController apellidoCtrl = TextEditingController();
   TextEditingController contactoCtrl = TextEditingController();
@@ -197,11 +198,11 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
                           width: 200,
                         ),
                   ElevatedButton(
-                      child: Text("CARGAR IMAGEN"),
+                      child: Text(cargaImagen),
                       onPressed: () async {
                         final XFile? _archivo = await ImagePicker()
                             .pickImage(source: ImageSource.gallery);
-
+                        cargaImagen = 'Cambiar Imagen';
                         setState(() {
                           _ruta = _archivo!.path;
                         });
@@ -210,6 +211,42 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
                       }),
                 ],
               ),
+              ElevatedButton(
+                onPressed: () async {
+                  String nombreImagen =
+                      DateTime.now().millisecondsSinceEpoch.toString() + '.png';
+                  var respuesta = await JardinProvider().ninoAgregar(
+                    nombreCtrl.text.trim(),
+                    apellidoCtrl.text.trim(),
+                    fechaSeleccionada.toString(),
+                    rutCtrl.text.trim(),
+                    contactoCtrl.text.trim(),
+                    int.tryParse(selectedNivel) ?? 1,
+                    nombreImagen,
+                  );
+
+                  var data = {'imagen': _image64, 'nombre': nombreImagen};
+                  var respuestaImagen = await JardinProvider()
+                      .postDataImagen(data, "/api/imagen");
+
+                  var contenido = json.decode(respuestaImagen.body);
+
+                  if (respuesta['messages'] != null) {
+                    print('error');
+                    if (respuesta['errors']['nombre'] != null) {
+                      errNombre = respuesta['errors']['nombre'][0];
+                    }
+                    if (respuesta['errors']['nivel'] != null) {
+                      errNivel = respuesta['errors']['nivel'][0];
+                    }
+
+                    setState(() {});
+                    return;
+                  }
+                  print('no error');
+                },
+                child: Text('Guardar Niño'),
+              ),
             ]
                 .map((child) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -217,42 +254,6 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
                     ))
                 .toList(),
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            String nombreImagen =
-                DateTime.now().millisecondsSinceEpoch.toString() + '.png';
-            var respuesta = await JardinProvider().ninoAgregar(
-              nombreCtrl.text.trim(),
-              apellidoCtrl.text.trim(),
-              fechaSeleccionada.toString(),
-              rutCtrl.text.trim(),
-              contactoCtrl.text.trim(),
-              int.tryParse(selectedNivel) ?? 1,
-              nombreImagen,
-            );
-
-            var data = {'imagen': _image64, 'nombre': nombreImagen};
-            var respuestaImagen =
-                await JardinProvider().postDataImagen(data, "/api/imagen");
-
-            var contenido = json.decode(respuestaImagen.body);
-
-            if (respuesta['messages'] != null) {
-              print('error');
-              if (respuesta['errors']['nombre'] != null) {
-                errNombre = respuesta['errors']['nombre'][0];
-              }
-              if (respuesta['errors']['nivel'] != null) {
-                errNivel = respuesta['errors']['nivel'][0];
-              }
-
-              setState(() {});
-              return;
-            }
-            print('no error');
-          },
-          child: Icon(MdiIcons.contentSave),
         ),
       ),
     );

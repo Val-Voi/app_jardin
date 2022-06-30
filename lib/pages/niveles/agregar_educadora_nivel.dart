@@ -17,7 +17,6 @@ class _EducadoraNivelFormState extends State<EducadoraNivelForm> {
   String errNino = '';
   String errNivel = '';
   final formKey = GlobalKey<FormState>();
-  TextEditingController nombreCtrl = TextEditingController();
 
   @override
   void dispose() {
@@ -166,42 +165,6 @@ class _EducadoraNivelFormState extends State<EducadoraNivelForm> {
                       buttonWidth: 200,
                       itemHeight: 40,
                       dropdownMaxHeight: 200,
-                      searchController: textEditingController,
-                      searchInnerWidget: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 8,
-                          bottom: 4,
-                          right: 8,
-                          left: 8,
-                        ),
-                        child: TextFormField(
-                          controller: textEditingController,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 8,
-                            ),
-                            hintText: 'Nivel',
-                            hintStyle: const TextStyle(fontSize: 12),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ),
-                      ),
-                      searchMatchFn: (item, searchValue) {
-                        return (item.child
-                            .toString()
-                            .toLowerCase()
-                            .contains(searchValue.toLowerCase()));
-                      },
-                      //This to clear the search value when you close the menu
-                      onMenuStateChange: (isOpen) {
-                        if (!isOpen) {
-                          textEditingController.clear();
-                        }
-                      },
                     ),
                   );
                 }),

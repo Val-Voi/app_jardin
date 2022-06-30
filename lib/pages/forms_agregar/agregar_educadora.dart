@@ -25,8 +25,6 @@ class _AgregarEducadoraPageState extends State<AgregarEducadoraPage> {
   TextEditingController telefonoCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController nivelCtrl = TextEditingController();
-  final TextEditingController textEditingController = TextEditingController();
-
   // Initial Selected Value
   String dropdownvalue = 'Nivel 1';
 
@@ -158,41 +156,6 @@ class _AgregarEducadoraPageState extends State<AgregarEducadoraPage> {
                       buttonWidth: 200,
                       itemHeight: 40,
                       dropdownMaxHeight: 200,
-                      searchController: textEditingController,
-                      searchInnerWidget: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 8,
-                          bottom: 4,
-                          right: 8,
-                          left: 8,
-                        ),
-                        child: TextFormField(
-                          controller: textEditingController,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 8,
-                            ),
-                            hintText: 'Nivel',
-                            hintStyle: const TextStyle(fontSize: 12),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ),
-                      ),
-                      searchMatchFn: (item, searchValue) {
-                        return (item.child
-                            .toString()
-                            .toLowerCase()
-                            .contains(searchValue.toLowerCase()));
-                      },
-                      onMenuStateChange: (isOpen) {
-                        if (!isOpen) {
-                          textEditingController.clear();
-                        }
-                      },
                     ),
                   );
                 }),
@@ -202,11 +165,6 @@ class _AgregarEducadoraPageState extends State<AgregarEducadoraPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            print(nombreCtrl.text.trim());
-            print(rutCtrl.text.trim());
-            print(telefonoCtrl.text.trim());
-            print(emailCtrl.text.trim());
-
             var respuesta = await JardinProvider().educadoraAgregar(
                 nombreCtrl.text.trim(),
                 rutCtrl.text.trim(),
