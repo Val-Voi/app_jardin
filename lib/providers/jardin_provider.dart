@@ -380,6 +380,16 @@ class JardinProvider {
     return json.decode(respuesta.body);
   }
 
+  Future<String> getEventoNino(String id_evento) async {
+    var uri = Uri.parse('$apiURL/eventos/$id_evento/nino');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return respuesta.body;
+    } else {
+      return '';
+    }
+  }
   //--------------------------PROVIDER IMAGEN------------------------
 
   postDataImagen(_data, _url) async {

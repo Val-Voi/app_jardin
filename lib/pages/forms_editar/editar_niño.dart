@@ -45,7 +45,7 @@ class _EditarNinoPageState extends State<EditarNinoPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Editar Niño'),
-          backgroundColor: Colors.orange,
+          backgroundColor: Color.fromARGB(255, 130, 192, 241),
         ),
         body: FutureBuilder(
             future: JardinProvider().getNino(widget.id),

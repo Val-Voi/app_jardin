@@ -57,7 +57,7 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Editar Educadora'),
-          backgroundColor: Colors.orange,
+          backgroundColor: Color.fromARGB(255, 130, 192, 241),
         ),
         body: Form(
           key: _formKey,

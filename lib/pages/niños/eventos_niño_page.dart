@@ -27,19 +27,19 @@ class _EventosNinoPageState extends State<EventosNinoPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Eventos de: ${widget.nino_nombre}'),
-          backgroundColor: Color.fromARGB(255, 136, 236, 74),
+          backgroundColor: Color.fromARGB(255, 185, 123, 243),
           leading: BackButton(),
           actions: [
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                MaterialPageRoute route = MaterialPageRoute(
-                  builder: (context) =>
-                      MainPage(), //TODO: REDIRIGIR A PAGINA DE AGREGAR EVENTO CON ID DE NIÑO
-                );
-                Navigator.push(context, route);
-              },
-            ),
+            // IconButton(
+            //   icon: Icon(Icons.add),
+            //   onPressed: () {
+            //     MaterialPageRoute route = MaterialPageRoute(
+            //       builder: (context) =>
+            //           MainPage(), //TODO: REDIRIGIR A PAGINA DE AGREGAR EVENTO CON ID DE NIÑO
+            //     );
+            //     Navigator.push(context, route);
+            //   },
+            // ),
           ],
         ),
         body: Padding(
@@ -129,7 +129,7 @@ class _EventosNinoPageState extends State<EventosNinoPage> {
                                                       duration:
                                                           Duration(seconds: 4),
                                                       content: Text(
-                                                          'El niño no se pudo borrar'),
+                                                          'El evento no se pudo borrar'),
                                                     ),
                                                   );
                                                 }
