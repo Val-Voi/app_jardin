@@ -1,12 +1,9 @@
 import 'package:app_jardin/pages/educadoras/lista_educadoras_page.dart';
-import 'package:app_jardin/pages/main_page_page.dart';
 import 'package:app_jardin/pages/niveles/agregar_a_nivel_page.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../providers/jardin_provider.dart';
-import '../forms_editar/editar_niño.dart';
-import '../niños/eventos_niño_page.dart';
+
 import '../niños/lista_ninos_page_copy.dart';
 
 class ListaNivelPage extends StatefulWidget {

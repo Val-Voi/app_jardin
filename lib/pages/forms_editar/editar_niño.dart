@@ -2,7 +2,6 @@ import 'package:app_jardin/pages/forms_editar/my_input_theme.dart';
 import 'package:app_jardin/pages/forms_editar/string_extensions.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../providers/jardin_provider.dart';
 

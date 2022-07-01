@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../providers/jardin_provider.dart';
 import 'forms_editar/editar_evento.dart';

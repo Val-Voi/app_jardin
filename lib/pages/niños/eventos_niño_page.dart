@@ -1,8 +1,6 @@
 import 'package:app_jardin/pages/forms_editar/editar_evento.dart';
-import 'package:app_jardin/pages/main_page_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../providers/jardin_provider.dart';
 
