@@ -81,6 +81,7 @@ class _ToggleFormButtonState extends State<ToggleFormButton> {
     return Container(
       alignment: Alignment.center,
       child: ToggleButtons(
+        borderRadius: BorderRadius.circular(25),
         children: <Widget>[
           Tab(
             text: 'Niño',
@@ -88,7 +89,7 @@ class _ToggleFormButtonState extends State<ToggleFormButton> {
           ),
           Tab(
             text: 'Educadora',
-            icon: Icon(MdiIcons.human),
+            icon: Icon(MdiIcons.humanFemaleBoy),
           ),
           Tab(
             text: 'Nivel',

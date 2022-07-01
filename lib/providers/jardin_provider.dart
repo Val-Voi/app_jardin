@@ -311,14 +311,19 @@ class JardinProvider {
 
   //--------------------------PROVIDER EVENTOS------------------------
   // agregar evento
-  Future<LinkedHashMap<String, dynamic>> eventoAgregar(String nombre) async {
-    var uri = Uri.parse('$apiURL/niveles');
+  Future<LinkedHashMap<String, dynamic>> eventoAgregar(
+      String descripcion, String fecha, int nino_id) async {
+    var uri = Uri.parse('$apiURL/eventos');
     var respuesta = await http.post(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': '/Application/json'
         },
-        body: jsonEncode(<String, dynamic>{'nombre': nombre}));
+        body: jsonEncode(<String, dynamic>{
+          'descripcion': descripcion,
+          'fecha': fecha,
+          'nino_id': nino_id
+        }));
     return json.decode(respuesta.body);
   }
 

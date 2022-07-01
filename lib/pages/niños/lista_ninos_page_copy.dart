@@ -114,12 +114,10 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                                       4 ==
                                                   0) {
                                                 Uint8List imgdecoded =
-                                                    base64Decode(
-                                                        base64.normalize(
-                                                            snapimagen.data
-                                                                .toString()
-                                                                .split('\n')
-                                                                .join()));
+                                                    base64Decode(snapimagen.data
+                                                        .toString()
+                                                        .split('\n')
+                                                        .join());
                                                 ImageProvider imagen =
                                                     Image.memory(imgdecoded)
                                                         .image;
@@ -233,7 +231,7 @@ class _ListaNinosPageState extends State<ListaNinosPage> {
                                                             duration: Duration(
                                                                 seconds: 4),
                                                             content: Text(
-                                                              'Niño ${nino['nombre']} borrado',
+                                                              'Niño ${nino['nombre']} ${nino['apellido']} borrado',
                                                               style: TextStyle(
                                                                   fontSize: 16),
                                                             ),

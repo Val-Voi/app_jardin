@@ -39,17 +39,6 @@ class _AgregarNinoPageState extends State<AgregarNinoPage> {
   TextEditingController rutCtrl = TextEditingController();
   TextEditingController nivelCtrl = TextEditingController();
   TextEditingController fechaNacCtrl = TextEditingController();
-  // valor inicial
-  String dropdownvalue = 'Nivel 1';
-
-  // Lista de items
-  var items = [
-    'Nivel 1',
-    'Nivel 2',
-    'Nivel 3',
-    'Nivel 4',
-    'Nivel 5',
-  ];
 
   @override
   Widget build(BuildContext context) {

@@ -368,9 +368,7 @@ class _MainPageState extends State<MainPage> {
                             MaterialPageRoute(builder: (context) {
                           return MenuNivelesPage();
                         });
-                        Navigator.push(context, route).then((value) {
-                          setState(() {});
-                        });
+                        Navigator.push(context, route);
                       }),
                       child: Column(
                         children: <Widget>[
@@ -382,7 +380,7 @@ class _MainPageState extends State<MainPage> {
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
                           Text(
-                            'Ver Niveles',
+                            'Lista Niveles',
                             style: TextStyle(color: Colors.black),
                           ),
                         ],

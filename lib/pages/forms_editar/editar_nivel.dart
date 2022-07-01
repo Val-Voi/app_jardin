@@ -24,7 +24,7 @@ class _EditarNivelPageState extends State<EditarNivelPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Editar Nivel'),
-          backgroundColor: Color.fromARGB(255, 212, 146, 247),
+          backgroundColor: Color.fromARGB(255, 130, 192, 241),
           leading: BackButton(),
         ),
         body: FutureBuilder(

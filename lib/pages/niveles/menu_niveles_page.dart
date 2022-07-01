@@ -142,7 +142,10 @@ class _MenuNivelesPageState extends State<MenuNivelesPage> {
                                                     EditarNivelPage(
                                                         nivel['id']),
                                               );
-                                              Navigator.push(context, route);
+                                              Navigator.push(context, route)
+                                                  .then((value) {
+                                                setState(() {});
+                                              });
                                             } else if (opcion ==
                                                 'integrantes') {
                                               int nivel_id = nivel['id'];
