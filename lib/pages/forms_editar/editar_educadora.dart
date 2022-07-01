@@ -7,7 +7,10 @@ import '../../providers/jardin_provider.dart';
 
 class EditarEducadoraPage extends StatefulWidget {
   final int id;
-  EditarEducadoraPage({Key? key, required this.id}) : super(key: key);
+  EditarEducadoraPage({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
   @override
   State<EditarEducadoraPage> createState() => _EditarEducadoraPageState();
 }
@@ -57,7 +60,7 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Editar Educadora'),
-          backgroundColor: Color.fromARGB(255, 130, 192, 241),
+          backgroundColor: Colors.orange,
         ),
         body: Form(
           key: _formKey,
@@ -164,7 +167,6 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
           onPressed: () {
             JardinProvider().educadoraEditar(
               widget.id,
-              //int.tryParse(idCtrl.text.trim()) ?? 0,
               nombreCtrl.text.trim(),
               rutCtrl.text.trim(),
               telefonoCtrl.text.trim(),
