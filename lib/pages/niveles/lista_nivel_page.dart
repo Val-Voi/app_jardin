@@ -33,7 +33,7 @@ class _ListaNivelPageState extends State<ListaNivelPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Integrantes de ${widget.nivel_nombre}'),
-          backgroundColor: Color.fromARGB(255, 136, 236, 74),
+          backgroundColor: Color.fromARGB(255, 212, 146, 247),
           leading: BackButton(),
         ),
         body: Padding(
@@ -43,7 +43,12 @@ class _ListaNivelPageState extends State<ListaNivelPage> {
                 child: Column(
                   children: [
                     Container(
-                      child: Text('Educadoras:'),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Educadoras:',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     FutureBuilder(
                       future: JardinProvider()
@@ -85,10 +90,10 @@ class _ListaNivelPageState extends State<ListaNivelPage> {
                                               value: 'datos',
                                               child: Text('Ver datos'),
                                             ),
-                                            PopupMenuItem(
-                                              value: 'nivel',
-                                              child: Text('Cambiar de Nivel'),
-                                            ),
+                                            // PopupMenuItem(
+                                            //   value: 'nivel',
+                                            //   child: Text('Cambiar de Nivel'),
+                                            // ), //TODO: redirigir a pagina para cambiar de nivel
                                           ],
                                           onSelected: (opcion) {
                                             if (opcion == 'nivel') {
@@ -125,8 +130,13 @@ class _ListaNivelPageState extends State<ListaNivelPage> {
                     //   height: 50,
                     // ),
                     Container(
-                      height: 80,
-                      child: Center(child: Text('Niños:')),
+                      padding: EdgeInsets.all(10),
+                      child: Center(
+                          child: Text(
+                        'Niños:',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      )),
                     ),
                     FutureBuilder(
                       future: JardinProvider()
