@@ -26,7 +26,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jardin App'),
+        title: Text('Jardin Pastelito'),
         backgroundColor: Color.fromARGB(255, 212, 146, 247),
         leading: Icon(MdiIcons.humanFemaleBoy),
       ),
