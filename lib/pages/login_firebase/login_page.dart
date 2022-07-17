@@ -48,7 +48,9 @@ class _LoginPageState extends State<LoginPage> {
                     inicioUsuario = 'Sesión iniciada como ';
                     usuario =
                         FirebaseAuth.instance.currentUser!.displayName ?? '';
-                    return Column(
+                    return ListView(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(0),
                       children: [
                         ElevatedButton(
                           onPressed: () {
@@ -73,11 +75,16 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: Text(
                             'Cerrar Sesión',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         Divider(),
-                        Text(inicioUsuario + usuario),
+                        Text(
+                          inicioUsuario + usuario,
+                          textAlign: TextAlign.center,
+                        ),
                       ],
                     );
                   } else if (snapshot.hasError) {
