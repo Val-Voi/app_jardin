@@ -1,7 +1,6 @@
 import 'package:app_jardin/providers/jardin_provider.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'dart:convert';
 

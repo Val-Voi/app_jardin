@@ -1,3 +1,4 @@
+import 'package:app_jardin/pages/login_firebase/login_page.dart';
 import 'package:app_jardin/pages/main_page_page.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      home: LoginPage(),
     );
   }
 }

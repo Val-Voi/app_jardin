@@ -1,14 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:app_jardin/pages/forms_editar/my_input_theme.dart';
-import 'package:app_jardin/pages/forms_editar/string_extensions.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
 import '../../providers/jardin_provider.dart';
 
 class AgregarEventoPage extends StatefulWidget {
@@ -177,8 +171,6 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                   }),
               ElevatedButton(
                 onPressed: () async {
-                  String nombreImagen =
-                      DateTime.now().millisecondsSinceEpoch.toString() + '.png';
                   var respuesta = await JardinProvider().eventoAgregar(
                     descripcionCtrl.text.trim(),
                     fechaSeleccionada.toString(),

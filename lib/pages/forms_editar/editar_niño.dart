@@ -187,7 +187,7 @@ class _EditarNinoPageState extends State<EditarNinoPage> {
                           return;
                         }
                         print('no error');
-                        Navigator.pop(context);
+                        //Navigator.pop(context);
                       },
                       child: Text('Guardar niño'),
                     ),

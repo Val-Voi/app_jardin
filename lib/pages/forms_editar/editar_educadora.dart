@@ -53,6 +53,7 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
 
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         inputDecorationTheme: MyInputTheme().theme(),
@@ -60,7 +61,7 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Editar Educadora'),
-          backgroundColor: Colors.orange,
+          backgroundColor: Color.fromARGB(255, 130, 192, 241),
         ),
         body: Form(
           key: _formKey,
@@ -129,30 +130,30 @@ class _EditarEducadoraPageState extends State<EditarEducadoraPage> {
               //Fin correo
 
               //DROPDOWN DE NIVELES
-              SizedBox(
-                width: 240,
-                child: DropdownButtonFormField<String>(
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(width: 3, color: Colors.blue),
-                    ),
-                  ),
-                  value: dropdownvalue,
-                  icon: Icon(MdiIcons.arrowDown),
-                  items: items.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(items),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownvalue = newValue!;
-                    });
-                  },
-                ),
-              )
+              // SizedBox(
+              //   width: 240,
+              //   child: DropdownButtonFormField<String>(
+              //     decoration: InputDecoration(
+              //       enabledBorder: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(12),
+              //         borderSide: BorderSide(width: 3, color: Colors.blue),
+              //       ),
+              //     ),
+              //     value: dropdownvalue,
+              //     icon: Icon(MdiIcons.arrowDown),
+              //     items: items.map((String items) {
+              //       return DropdownMenuItem(
+              //         value: items,
+              //         child: Text(items),
+              //       );
+              //     }).toList(),
+              //     onChanged: (String? newValue) {
+              //       setState(() {
+              //         dropdownvalue = newValue!;
+              //       });
+              //     },
+              //   ),
+              // )
 
               //FINAL DROPDOWN DE NIVELES
             ]

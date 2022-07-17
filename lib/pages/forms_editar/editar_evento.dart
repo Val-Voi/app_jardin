@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:app_jardin/pages/forms_editar/my_input_theme.dart';
-import 'package:app_jardin/pages/forms_editar/string_extensions.dart';
 
 class EditarEventoPage extends StatefulWidget {
   EditarEventoPage({Key? key}) : super(key: key);

@@ -1,7 +1,5 @@
 import 'package:app_jardin/pages/forms_editar/editar_evento.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import '../../providers/jardin_provider.dart';
 
 class EventosNinoPage extends StatefulWidget {

@@ -254,7 +254,7 @@ class JardinProvider {
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
-          'niveles_id': id_nivel,
+          'nivel_id': id_nivel,
         }));
     //agregarEducadoraNivel(niveles_id);
     return json.decode(respuesta.body);
@@ -269,8 +269,8 @@ class JardinProvider {
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
-          'niveles_id': id_nivel,
-          'educadoras_id': id_educadora
+          'nivel_id': id_nivel,
+          'educadora_id': id_educadora
         }));
     //agregarEducadoraNivel(niveles_id);
     return json.decode(respuesta.body);

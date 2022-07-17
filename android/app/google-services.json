@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "12775532433",
+    "project_id": "dam-app-jardin",
+    "storage_bucket": "dam-app-jardin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12775532433:android:39ec56e7b6811e258c1c30",
+        "android_client_info": {
+          "package_name": "com.example.app_jardin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12775532433-k0mk2iqja33c24d0i9mk23foa4n2vo3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app_jardin",
+            "certificate_hash": "23f77279faad93ed0c2b87894340c5284f64b4c1"
+          }
+        },
+        {
+          "client_id": "12775532433-12p4rlpka1j7c8jgbs7doeitsql8dvan.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgd8I59agoIZSK-Dk-z8OzIKkZUPGbkec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12775532433-12p4rlpka1j7c8jgbs7doeitsql8dvan.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

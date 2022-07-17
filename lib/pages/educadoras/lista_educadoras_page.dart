@@ -84,7 +84,7 @@ class _ListaEducadorasPageState extends State<ListaEducadorasPage> {
                                         width: 100,
                                         height: 100,
                                         alignment: Alignment.center,
-                                        child: Text('probando'),
+                                        child: Icon(MdiIcons.humanFemaleBoy),
                                       ),
                                       Expanded(
                                           child: Column(
