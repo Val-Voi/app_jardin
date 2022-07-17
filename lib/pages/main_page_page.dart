@@ -1,11 +1,15 @@
 import 'package:app_jardin/pages/lista_eventos_page.dart';
+import 'package:app_jardin/pages/login_firebase/login_page.dart';
 import 'package:app_jardin/pages/niveles/agregar_a_nivel_page.dart';
 import 'package:app_jardin/pages/niveles/menu_niveles_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:app_jardin/pages/agregar_page.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:app_jardin/pages/niños/lista_ninos_page_copy.dart';
+import 'package:provider/provider.dart';
+import '../providers/google_provider.dart';
 import 'educadoras/lista_educadoras_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,6 +20,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final usuario = FirebaseAuth.instance.currentUser!.displayName ?? '';
   int index_agregar = 0;
   final GlobalKey<ExpansionTileCardState> cardNinos = new GlobalKey();
   final GlobalKey<ExpansionTileCardState> cardEducadoras = new GlobalKey();
@@ -29,6 +34,35 @@ class _MainPageState extends State<MainPage> {
         title: Text('Jardin Pastelito'),
         backgroundColor: Color.fromARGB(255, 212, 146, 247),
         leading: BackButton(),
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) {
+              if (value == 'logout') {
+                final provider =
+                    Provider.of<GoogleProvider>(context, listen: false);
+                provider.googleLogout();
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    (Route<dynamic> route) => false);
+              }
+            },
+            itemBuilder: (BuildContext bc) {
+              return [
+                PopupMenuItem(
+                  child: Text(
+                    'Usuario: ' + usuario,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: Text("Cerrar Sesión"),
+                  value: 'logout',
+                ),
+              ];
+            },
+          ),
+        ],
       ),
       body: ListView(
         children: <Widget>[
