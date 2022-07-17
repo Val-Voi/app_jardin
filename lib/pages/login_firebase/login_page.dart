@@ -27,7 +27,6 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.all(50),
             children: [
               Image(image: AssetImage('assets/images/logo.png')),
-              Divider(),
               ElevatedButton(
                 onPressed: () {
                   MaterialPageRoute route = MaterialPageRoute(
