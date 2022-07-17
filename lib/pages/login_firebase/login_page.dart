@@ -1,8 +1,10 @@
 import 'package:app_jardin/pages/main_page_page.dart';
+import 'package:app_jardin/pages/noticias_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/google_provider.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -12,92 +14,93 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String error = "";
-  TextEditingController emailCtrl = TextEditingController();
-  TextEditingController passwordCtrl = TextEditingController();
+  String usuario = '';
+  String inicioUsuario = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Ejercicio Firebase'),
-        backgroundColor: Color(0xFF363942),
-        leading: Icon(
-          MdiIcons.firebase,
-          color: Colors.yellow,
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(5),
+      backgroundColor: Color.fromARGB(255, 253, 227, 243),
+      body: Center(
         child: ListView(
-          children: [
-            TextFormField(
-              controller: emailCtrl,
-              decoration: InputDecoration(
-                labelText: 'Email',
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(50),
+            children: [
+              Image(image: AssetImage('assets/images/logo.png')),
+              Divider(),
+              ElevatedButton(
+                onPressed: () {
+                  MaterialPageRoute route = MaterialPageRoute(
+                    builder: (context) => NoticiasPage(),
+                  );
+                  Navigator.push(context, route);
+                },
+                child: Text(
+                  'Ver Noticias',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            TextFormField(
-              controller: passwordCtrl,
-              decoration: InputDecoration(
-                labelText: 'Password',
-              ),
-              obscureText: true,
-            ),
-            Container(
-              width: double.infinity,
-              child: ElevatedButton(
-                child: Text('Iniciar Sesión'),
-                onPressed: () async {
-                  UserCredential? userCredential;
-                  try {
-                    userCredential =
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: emailCtrl.text.trim(),
-                      password: passwordCtrl.text.trim(),
+              StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    inicioUsuario = 'Sesión iniciada como ';
+                    usuario =
+                        FirebaseAuth.instance.currentUser!.displayName ?? '';
+                    return Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            MaterialPageRoute route = MaterialPageRoute(
+                              builder: (context) => MainPage(),
+                            );
+                            Navigator.push(context, route);
+                          },
+                          child: Text(
+                            'Gestionar Jardín',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            inicioUsuario = '';
+                            usuario = '';
+                            final provider = Provider.of<GoogleProvider>(
+                                context,
+                                listen: false);
+                            provider.googleLogout();
+                          },
+                          child: Text(
+                            'Cerrar Sesión',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Divider(),
+                        Text(inicioUsuario + usuario),
+                      ],
                     );
-
-                    SharedPreferences sp =
-                        await SharedPreferences.getInstance();
-                    sp.setString('userEmail', emailCtrl.text.trim());
-
-                    MaterialPageRoute route = MaterialPageRoute(
-                      builder: (context) => MainPage(),
+                  } else if (snapshot.hasError) {
+                    return Text('No se pudo iniciar sesion');
+                  } else if (!snapshot.hasData) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        final provider =
+                            Provider.of<GoogleProvider>(context, listen: false);
+                        provider.googleLogin();
+                      },
+                      child: Text(
+                        'Iniciar Sesión',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     );
-                    Navigator.pushReplacement(context, route);
-                  } on FirebaseAuthException catch (ex) {
-                    // print('EXCEPTION: ${ex.code}');
-                    switch (ex.code) {
-                      case 'user-not-found':
-                        error = 'Usuario no existe';
-                        break;
-                      case 'wrong-password':
-                        error = 'Contraseña no válida';
-                        break;
-                      case 'user-disabled':
-                        error = 'Cuenta desactivada';
-                        break;
-                      default:
-                        error = 'Error desconocido';
-                    }
-                    setState(() {});
+                  } else {
+                    return Text('');
                   }
                 },
               ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              child: Text(
-                error,
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ],
-        ),
+            ]),
       ),
     );
   }

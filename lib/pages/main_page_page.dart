@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text('Jardin Pastelito'),
         backgroundColor: Color.fromARGB(255, 212, 146, 247),
-        leading: Icon(MdiIcons.humanFemaleBoy),
+        leading: BackButton(),
       ),
       body: ListView(
         children: <Widget>[
