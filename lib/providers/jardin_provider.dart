@@ -415,4 +415,9 @@ class JardinProvider {
       return '';
     }
   }
+
+  //--------------------------PROVIDER NOTICIAS------------------------
+
+  
 }
+
