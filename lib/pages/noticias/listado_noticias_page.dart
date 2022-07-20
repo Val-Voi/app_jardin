@@ -57,38 +57,59 @@ class _ListaNoticiaPageState extends State<ListaNoticiaPage> {
                     var hora = formatoHora.format(noticia['fecha'].toDate());
 
                     return ListTile(
-                      title: Text('${noticia['titulo']}\n'),
-                      subtitle: Text(
-                          '${noticia['contenido']} \n\nFecha: ${fecha} ${hora}'),
-                      trailing: Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              MdiIcons.fileEdit,
-                              color: Color.fromARGB(255, 255, 90, 90),
-                            ),
-                            onPressed: () {
-                              // print(noticia.id);
-                              MaterialPageRoute route = MaterialPageRoute(
-                                builder: (context) =>
-                                    EditarNoticiaPage(noticia.id.toString()),
-                              );
-                              Navigator.push(context, route);
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              MdiIcons.trashCan,
-                              color: Color.fromARGB(255, 255, 90, 90),
-                            ),
-                            onPressed: () {
-                              // print(noticia.id);
-                              FirestoreService().noticiasBorrar(noticia.id);
-                            },
-                          ),
-                        ],
-                      ),
-                    );
+                        title: Text('${noticia['titulo']}\n'),
+                        subtitle: Text(
+                            '${noticia['contenido']} \n\nFecha: ${fecha} ${hora}'),
+                        // trailing: Row(
+                        //   children: [
+                        //     IconButton(
+                        //       icon: Icon(
+                        //         MdiIcons.fileEdit,
+                        //         color: Color.fromARGB(255, 255, 90, 90),
+                        //       ),
+                        //       onPressed: () {
+                        //         // print(noticia.id);
+                        //         MaterialPageRoute route = MaterialPageRoute(
+                        //           builder: (context) =>
+                        //               EditarNoticiaPage(noticia.id.toString()),
+                        //         );
+                        //         Navigator.push(context, route);
+                        //       },
+                        //     ),
+                        //     IconButton(
+                        //       icon: Icon(
+                        //         MdiIcons.trashCan,
+                        //         color: Color.fromARGB(255, 255, 90, 90),
+                        //       ),
+                        //       onPressed: () {
+                        //         // print(noticia.id);
+                        //         FirestoreService().noticiasBorrar(noticia.id);
+                        //       },
+                        //     ),
+                        //   ],
+                        // ),
+                        trailing: PopupMenuButton(
+                            itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                    value: 'editar',
+                                    child: Text('Editar'),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'borrar',
+                                    child: Text('Borrar'),
+                                  ),
+                                ],
+                            onSelected: (opcion) {
+                              if (opcion == 'editar') {
+                                MaterialPageRoute route = MaterialPageRoute(
+                                  builder: (context) =>
+                                      EditarNoticiaPage(noticia.id.toString()),
+                                );
+                                Navigator.push(context, route);
+                              } else if (opcion == 'borrar') {
+                                FirestoreService().noticiasBorrar(noticia.id);
+                              }
+                            }));
                   },
                 );
               },
