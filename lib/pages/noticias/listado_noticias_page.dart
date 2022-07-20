@@ -3,7 +3,6 @@ import 'package:app_jardin/pages/noticias/editar_noticias_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../providers/firestore_provider.dart';
 
 class ListaNoticiaPage extends StatefulWidget {
@@ -24,16 +23,6 @@ class _ListaNoticiaPageState extends State<ListaNoticiaPage> {
         title: Text('Noticias'),
         backgroundColor: Color.fromARGB(255, 185, 123, 243),
         leading: BackButton(),
-        actions: [
-          IconButton(
-              onPressed: () {
-                MaterialPageRoute route = MaterialPageRoute(
-                  builder: (context) => AgregarNoticiasPage(),
-                );
-                Navigator.push(context, route);
-              },
-              icon: Icon(Icons.add))
-        ],
       ),
       body: Column(
         children: [
@@ -57,59 +46,10 @@ class _ListaNoticiaPageState extends State<ListaNoticiaPage> {
                     var hora = formatoHora.format(noticia['fecha'].toDate());
 
                     return ListTile(
-                        title: Text('${noticia['titulo']}\n'),
-                        subtitle: Text(
-                            '${noticia['contenido']} \n\nFecha: ${fecha} ${hora}'),
-                        // trailing: Row(
-                        //   children: [
-                        //     IconButton(
-                        //       icon: Icon(
-                        //         MdiIcons.fileEdit,
-                        //         color: Color.fromARGB(255, 255, 90, 90),
-                        //       ),
-                        //       onPressed: () {
-                        //         // print(noticia.id);
-                        //         MaterialPageRoute route = MaterialPageRoute(
-                        //           builder: (context) =>
-                        //               EditarNoticiaPage(noticia.id.toString()),
-                        //         );
-                        //         Navigator.push(context, route);
-                        //       },
-                        //     ),
-                        //     IconButton(
-                        //       icon: Icon(
-                        //         MdiIcons.trashCan,
-                        //         color: Color.fromARGB(255, 255, 90, 90),
-                        //       ),
-                        //       onPressed: () {
-                        //         // print(noticia.id);
-                        //         FirestoreService().noticiasBorrar(noticia.id);
-                        //       },
-                        //     ),
-                        //   ],
-                        // ),
-                        trailing: PopupMenuButton(
-                            itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                    value: 'editar',
-                                    child: Text('Editar'),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 'borrar',
-                                    child: Text('Borrar'),
-                                  ),
-                                ],
-                            onSelected: (opcion) {
-                              if (opcion == 'editar') {
-                                MaterialPageRoute route = MaterialPageRoute(
-                                  builder: (context) =>
-                                      EditarNoticiaPage(noticia.id.toString()),
-                                );
-                                Navigator.push(context, route);
-                              } else if (opcion == 'borrar') {
-                                FirestoreService().noticiasBorrar(noticia.id);
-                              }
-                            }));
+                      title: Text('${noticia['titulo']}\n'),
+                      subtitle: Text(
+                          '${noticia['contenido']} \n\nFecha: ${fecha} ${hora}'),
+                    );
                   },
                 );
               },

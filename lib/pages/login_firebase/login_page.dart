@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/google_provider.dart';
+import '../noticias/listado_noticias_admin_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -27,17 +28,39 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.all(50),
             children: [
               Image(image: AssetImage('assets/images/logo.png')),
-              ElevatedButton(
-                onPressed: () {
-                  MaterialPageRoute route = MaterialPageRoute(
-                    builder: (context) => ListaNoticiaPage(),
-                  );
-                  Navigator.push(context, route);
+              StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        MaterialPageRoute route = MaterialPageRoute(
+                          builder: (context) => ListaNoticiaAdminPage(),
+                        );
+                        Navigator.push(context, route);
+                      },
+                      child: Text(
+                        'Ver Noticias',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  } else {
+                    return ElevatedButton(
+                      onPressed: () {
+                        MaterialPageRoute route = MaterialPageRoute(
+                          builder: (context) => ListaNoticiaPage(),
+                        );
+                        Navigator.push(context, route);
+                      },
+                      child: Text(
+                        'Ver Noticias',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  }
                 },
-                child: Text(
-                  'Ver Noticias',
-                  style: TextStyle(color: Colors.white),
-                ),
               ),
               StreamBuilder(
                 stream: FirebaseAuth.instance.authStateChanges(),
