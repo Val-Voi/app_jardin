@@ -453,6 +453,18 @@ class JardinProvider {
     return respuesta.statusCode == 200;
   }
 
+    //datos de 1 noticia
+  Future<LinkedHashMap<String, dynamic>> getNoticia(int id) async {
+    var uri = Uri.parse('$apiURL/noticias/$id');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return new LinkedHashMap();
+    }
+  }
+
   //editar una noticia
   Future<LinkedHashMap<String, dynamic>> noticiaEditar(
     int id,
@@ -474,3 +486,4 @@ class JardinProvider {
         }));
 }
 
+}
