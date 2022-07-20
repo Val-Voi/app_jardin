@@ -454,23 +454,37 @@ class JardinProvider {
     return respuesta.statusCode == 200;
   }
 
-  // //editar una noticia
-  // Future<LinkedHashMap<String, dynamic>> noticiaEditar(
-  //   int id,
-  //   String titulo,
-  //   String contenido,
-  //   String fecha,
-  // ) async {
-  //   var uri = Uri.parse('$apiURL/noticias/$id');
-  //   var respuesta = await http.put(uri,
-  //       headers: <String, String>{
-  //         'Content-Type': 'application/json; charset=UTF-8',
-  //         'Accept': 'application/json'
-  //       },
-  //       body: jsonEncode(<String, dynamic>{
-  //         'titulo': titulo,
-  //         'contenido': contenido,
-  //         'fecha': fecha,
-  //       }));
-  // }
+  //datos de 1 noticia
+  Future<LinkedHashMap<String, dynamic>> getNoticia(int id) async {
+    var uri = Uri.parse('$apiURL/noticias/$id');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return new LinkedHashMap();
+    }
+  }
+
+//   //editar una noticia
+//   Future<LinkedHashMap<String, dynamic>> noticiaEditar(
+//     int id,
+//     String titulo,
+//     String contenido,
+//     String fecha,
+
+//   ) async {
+//     var uri = Uri.parse('$apiURL/noticias/$id');
+//     var respuesta = await http.put(uri,
+//         headers: <String, String>{
+//           'Content-Type': 'application/json; charset=UTF-8',
+//           'Accept': 'application/json'
+//         },
+//         body: jsonEncode(<String, dynamic>{
+//           'titulo': titulo,
+//           'contenido': contenido,
+//           'fecha': fecha,
+//         }));
+// }
+
 }
