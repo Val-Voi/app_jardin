@@ -59,7 +59,7 @@ class _ListaNoticiaAdminPageState extends State<ListaNoticiaAdminPage> {
                     return ListTile(
                         title: Text('${noticia['titulo']}\n'),
                         subtitle: Text(
-                            '${noticia['contenido']} \n\nFecha: ${fecha} ${hora}'),
+                            '${noticia['contenido']} \n\nFecha: ${fecha} \nHora: ${hora}'),
                         trailing: PopupMenuButton(
                             itemBuilder: (context) => [
                                   PopupMenuItem(
