@@ -1,8 +1,9 @@
+import 'package:app_jardin/providers/firestore_provider.dart';
 import 'package:app_jardin/providers/jardin_provider.dart';
 import 'package:flutter/material.dart';
 
 class EditarNoticiaPage extends StatefulWidget {
-  int idNoticia;
+  String idNoticia;
   EditarNoticiaPage(this.idNoticia, {Key? key}) : super(key: key);
 
   @override
@@ -10,11 +11,11 @@ class EditarNoticiaPage extends StatefulWidget {
 }
 
 class _EditarNoticiaPageState extends State<EditarNoticiaPage> {
-
   TextEditingController tituloCtrl = TextEditingController();
-  TextEditingController contenidoCtrl= TextEditingController();
+  TextEditingController contenidoCtrl = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  DateTime fecha = DateTime.now();
 
   @override
   void initState() {
@@ -24,13 +25,13 @@ class _EditarNoticiaPageState extends State<EditarNoticiaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
           title: Text('Editar Noticia'),
           backgroundColor: Color.fromARGB(255, 130, 192, 241),
           leading: BackButton(),
         ),
-      body: FutureBuilder(
-          future: JardinProvider().getNoticia(widget.idNoticia),
+        body: FutureBuilder(
+          future: FirestoreService().getNoticia(widget.idNoticia),
           builder: (context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return Center(
@@ -58,10 +59,11 @@ class _EditarNoticiaPageState extends State<EditarNoticiaPage> {
                     child: ElevatedButton(
                       child: Text('Editar'),
                       onPressed: () {
-                        JardinProvider().noticiaEditar(
+                        FirestoreService().noticiasEditar(
                           widget.idNoticia,
                           tituloCtrl.text.trim(),
                           contenidoCtrl.text.trim(),
+                          fecha,
                         );
                         Navigator.pop(context);
                       },
@@ -71,7 +73,6 @@ class _EditarNoticiaPageState extends State<EditarNoticiaPage> {
               ),
             );
           },
-        )
-    );
+        ));
   }
 }

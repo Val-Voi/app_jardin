@@ -419,7 +419,8 @@ class JardinProvider {
   //--------------------------PROVIDER NOTICIAS------------------------
 
   //agregar noticia
-  Future<LinkedHashMap<String, dynamic>> noticiaAgregar(String titulo, String contenido, String fecha) async {
+  Future<LinkedHashMap<String, dynamic>> noticiaAgregar(
+      String titulo, String contenido, String fecha) async {
     var uri = Uri.parse('$apiURL/noticias');
     var respuesta = await http.post(uri,
         headers: <String, String>{
@@ -430,10 +431,10 @@ class JardinProvider {
           'titulo': titulo,
           'contenido': contenido,
           'fecha': fecha
-          }));
+        }));
     return json.decode(respuesta.body);
   }
-  
+
   //lista noticia
   Future<List<dynamic>> getNoticias() async {
     var uri = Uri.parse('$apiURL/noticias');
@@ -453,24 +454,23 @@ class JardinProvider {
     return respuesta.statusCode == 200;
   }
 
-  //editar una noticia
-  Future<LinkedHashMap<String, dynamic>> noticiaEditar(
-    int id,
-    String titulo,
-    String contenido,
-    String fecha,
-    
-  ) async {
-    var uri = Uri.parse('$apiURL/noticias/$id');
-    var respuesta = await http.put(uri,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'titulo': titulo,
-          'contenido': contenido,
-          'fecha': fecha,
-        }));
+  // //editar una noticia
+  // Future<LinkedHashMap<String, dynamic>> noticiaEditar(
+  //   int id,
+  //   String titulo,
+  //   String contenido,
+  //   String fecha,
+  // ) async {
+  //   var uri = Uri.parse('$apiURL/noticias/$id');
+  //   var respuesta = await http.put(uri,
+  //       headers: <String, String>{
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //         'Accept': 'application/json'
+  //       },
+  //       body: jsonEncode(<String, dynamic>{
+  //         'titulo': titulo,
+  //         'contenido': contenido,
+  //         'fecha': fecha,
+  //       }));
+  // }
 }
-

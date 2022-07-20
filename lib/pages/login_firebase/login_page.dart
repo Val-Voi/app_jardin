@@ -1,5 +1,5 @@
 import 'package:app_jardin/pages/main_page_page.dart';
-import 'package:app_jardin/pages/noticias_page.dart';
+import 'package:app_jardin/pages/noticias/listado_noticias_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: () {
                   MaterialPageRoute route = MaterialPageRoute(
-                    builder: (context) => NoticiasPage(),
+                    builder: (context) => ListaNoticiaPage(),
                   );
                   Navigator.push(context, route);
                 },
